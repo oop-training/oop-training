@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Renderer")
 class RendererTest {
     @Test
-    @DisplayName("should")
+    @DisplayName("should render ladder in english")
     void renderer_test() {
         final List<Participant> participants = Arrays.asList(
-                Participant.of("a", "꽝"),
-                Participant.of("bhello", "당첨"),
-                Participant.of("c", "꽝"),
-                Participant.of("d", "꽝")
+                Participant.of("a", "X"),
+                Participant.of("bhello", "O"),
+                Participant.of("c", "X"),
+                Participant.of("d", "X")
         );
         final SettingContext settingContext = SettingContext.builder()
                 .participants(participants)
@@ -32,13 +32,42 @@ class RendererTest {
 
         final String expectedLadder =
                 "a       bhello  c       d\n" +
-                "|       |       |       |\n" +
-                "|       |       |       |\n" +
-                "|       |       |       |\n" +
-                "|       |       |       |\n" +
-                "|       |       |       |\n" +
-                "꽝       당첨     꽝      꽝\n";
+                        "|       |       |       |\n" +
+                        "|       |       |       |\n" +
+                        "|       |       |       |\n" +
+                        "|       |       |       |\n" +
+                        "|       |       |       |\n" +
+                        "X       O       X       X";
+
         assertThat(ladderResult).isEqualTo(expectedLadder);
     }
 
+    @Test
+    @DisplayName("should render ladder in korean")
+    void renderer_test_2() {
+        final List<Participant> participants = Arrays.asList(
+                Participant.of("a", "X"),
+                Participant.of("soloooooongword", "O"),
+                Participant.of("c", "X"),
+                Participant.of("d", "X")
+        );
+        final SettingContext settingContext = SettingContext.builder()
+                .participants(participants)
+                .maxHeight(5).build();
+        final Renderer renderer = Renderer.of();
+
+
+        final String ladderResult = renderer.render(settingContext);
+
+
+        final String expectedLadder =
+                "a       soloo.. c       d\n" +
+                        "|       |       |       |\n" +
+                        "|       |       |       |\n" +
+                        "|       |       |       |\n" +
+                        "|       |       |       |\n" +
+                        "|       |       |       |\n" +
+                        "X       O       X       X";
+        assertThat(ladderResult).isEqualTo(expectedLadder);
+    }
 }
