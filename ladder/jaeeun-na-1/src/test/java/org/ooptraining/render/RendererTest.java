@@ -61,7 +61,7 @@ class RendererTest {
 
 
         final String expectedLadder =
-                "a       soloo.. c       d\n" +
+                        "a       soloo.. c       d\n" +
                         "|       |       |       |\n" +
                         "|       |       |       |\n" +
                         "|       |       |       |\n" +

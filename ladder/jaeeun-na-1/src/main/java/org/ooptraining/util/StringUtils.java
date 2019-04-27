@@ -2,11 +2,11 @@ package org.ooptraining.util;
 
 public class StringUtils {
     public static String padding(final int paddingSize) {
-        final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < paddingSize; i++) {
-            builder.append(" ");
-        }
-        return builder.toString();
+        return generate(paddingSize, ' ');
+    }
+
+    public static String line(final int paddingSize) {
+        return generate(paddingSize, '-');
     }
 
     public static int getRemainPadding(final String name, final int paddingLength) {
@@ -18,5 +18,13 @@ public class StringUtils {
             return name;
         }
         return name.substring(0, maxNameLength - 3) + "..";
+    }
+
+    private static String generate(final int size, final char ch) {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            builder.append(ch);
+        }
+        return builder.toString();
     }
 }
