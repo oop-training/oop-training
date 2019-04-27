@@ -1,5 +1,6 @@
 package org.ooptraining;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.setting.Setting;
 import org.ooptraining.setting.SettingContext;
@@ -14,9 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.ooptraining.setting.Setting.Type.*;
 import static org.ooptraining.util.IOUtils.simulateStandardInputOutput;
 
+@DisplayName("SettingProcessor")
 class SettingProcessorTest {
     @Test
-    void settings_input_test1() {
+    @DisplayName("should handle to parse name, result, and max-height for ladder")
+    void should_generate_participants() {
         //given
         final String input = "a,b,c,d\n" +
                 "꽝,성공,꽝,꽝\n" +
@@ -52,7 +55,8 @@ class SettingProcessorTest {
     }
 
     @Test
-    void settings_input_test2() {
+    @DisplayName("should throw exception when name-result is not paired")
+    void exception_when_not_paired() {
         //given
         final String input = "a,b,c,d\n" +
                 "꽝,성공,꽝,꽝,뭐야이건\n" +
