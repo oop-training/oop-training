@@ -2,12 +2,10 @@ package org.ooptraining;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.ooptraining.util.IOUtils.simulateStandardInputOutput;
 
 public class MainTest {
     @Test
@@ -50,18 +48,10 @@ public class MainTest {
                 "jk : 5000\n" +
                 "\n" +
                 "결과를 보고 싶은 사람은?\n" +
-                "bye!";
+                "bye!\n";
 
 
         assertThat(out.toString()).isEqualTo(expected);
     }
 
-    private OutputStream simulateStandardInputOutput(final String input) {
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        System.setOut(new PrintStream(out));
-
-        return out;
-    }
 }
