@@ -2,19 +2,18 @@ package org.ooptraining.setting;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.ooptraining.Parser;
 import org.ooptraining.setting.parser.MaxHeightParser;
 import org.ooptraining.setting.parser.NameParser;
 import org.ooptraining.setting.parser.ResultParser;
 
 @Getter
 @RequiredArgsConstructor(staticName = "of")
-public class Setting {
+public class Setting implements Parser {
     private final Type type;
     private final String inputMessages;
 
-    public void handle(final String line, final SettingContext.Builder builder) {
-        type.parser.handle(line, builder);
+    public void parse(final String line, final SettingContext.Builder builder) {
+        type.parser.parse(line, builder);
     }
 
     @RequiredArgsConstructor

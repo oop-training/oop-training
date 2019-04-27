@@ -18,7 +18,7 @@ import static org.ooptraining.util.IOUtils.simulateStandardInputOutput;
 @DisplayName("SettingProcessor")
 class SettingProcessorTest {
     @Test
-    @DisplayName("should handle to parse name, result, and max-height for ladder")
+    @DisplayName("should parse to parse name, result, and max-height for ladder")
     void should_generate_participants() {
         //given
         final String input = "a,b,c,d\n" +
