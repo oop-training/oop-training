@@ -3,7 +3,6 @@ package org.ooptraining.setting;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,7 +16,6 @@ public class SettingProcessor {
 
         settings.forEach(setting -> {
             final String line = sc.nextLine();
-            log.info(line);
             System.out.println(setting.getInputMessages());
             setting.parse(line, builder);
         });

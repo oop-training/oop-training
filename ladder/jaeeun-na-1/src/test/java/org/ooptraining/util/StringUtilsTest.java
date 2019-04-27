@@ -42,7 +42,7 @@ class StringUtilsTest {
     @Test
     void normalize2() {
         final String input2 = "abcdefgh";
-        final String expected2 = "abc..";
+        final String expected2 = "abcd..";
         assertThat(StringUtils.normalize(input2, 6)).isEqualTo(expected2);
     }
 }

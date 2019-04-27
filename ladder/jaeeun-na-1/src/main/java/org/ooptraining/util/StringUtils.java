@@ -17,7 +17,7 @@ public class StringUtils {
         if (name.length() <= maxNameLength) {
             return name;
         }
-        return name.substring(0, maxNameLength - 3) + "..";
+        return name.substring(0, maxNameLength - 2) + "..";
     }
 
     private static String generate(final int size, final char ch) {
