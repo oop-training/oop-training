@@ -1,8 +1,9 @@
 package org.ooptraining;
 
 import lombok.extern.java.Log;
+import org.ooptraining.setting.Setting;
+import org.ooptraining.setting.SettingProcessor;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -11,11 +12,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final Scanner sc = new Scanner(System.in);
-        final List<String> messages = Arrays.asList(
-                "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)",
-                "실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)",
-                "최대 사다리 높이는 몇 개인가요?"
-        );
         final List<String> resultMessages = Arrays.asList(
                 "사다리 결과",
                 "pobi    honux   crong   jk\n" +
@@ -36,15 +32,15 @@ public class Main {
                         "crong : 꽝\n" +
                         "jk : 5000\n"
         );
-        final List<String> container = new ArrayList<>();
 
 
-        messages.forEach(message -> {
-            System.out.println(message);
+        SettingProcessor settingProcessor = SettingProcessor.of(sc);
+        settingProcessor.run(Arrays.asList(
+                Setting.NAME,
+                Setting.RESULT,
+                Setting.MAX_HEIGHT
+        ));
 
-            final String input = sc.nextLine();
-            container.add(input);
-        });
         System.out.println();
         resultMessages.forEach(m -> {
             System.out.println(m);
@@ -55,7 +51,6 @@ public class Main {
             for (String m : queryMessages) {
                 System.out.println(m);
                 final String input = sc.nextLine();
-                log.info(">>> " + input);
                 if (input.equalsIgnoreCase("!bye")) {
                     System.out.println("bye!");
                     return;

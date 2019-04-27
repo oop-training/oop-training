@@ -9,6 +9,7 @@ import org.ooptraining.setting.SettingProcessor;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -31,7 +32,7 @@ class SettingProcessorTest {
 
         //when
         final OutputStream out = simulateStandardInputOutput(input);
-        final SettingProcessor processor = SettingProcessor.of(System.in);
+        final SettingProcessor processor = SettingProcessor.of(new Scanner(System.in));
         final SettingContext context = processor.run(settings);
 
         //then
@@ -68,7 +69,7 @@ class SettingProcessorTest {
 
         //when
         simulateStandardInputOutput(input);
-        final SettingProcessor processor = SettingProcessor.of(System.in);
+        final SettingProcessor processor = SettingProcessor.of(new Scanner(System.in));
 
         //then
         assertThrows(IllegalStateException.class, () -> {
