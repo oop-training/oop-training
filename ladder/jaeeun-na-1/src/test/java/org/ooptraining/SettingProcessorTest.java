@@ -12,7 +12,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.ooptraining.setting.Setting.Type.*;
 import static org.ooptraining.util.IOUtils.simulateStandardInputOutput;
 
 @DisplayName("SettingProcessor")
@@ -25,9 +24,9 @@ class SettingProcessorTest {
                 "꽝,성공,꽝,꽝\n" +
                 "10\n";
         final List<Setting> settings = Arrays.asList(
-                Setting.of(NAME, "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"),
-                Setting.of(RESULT, "실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)"),
-                Setting.of(MAX_HEIGHT, "최대 사다리 높이는 몇 개인가요?")
+                Setting.NAME,
+                Setting.RESULT,
+                Setting.MAX_HEIGHT
         );
 
         //when
@@ -62,9 +61,9 @@ class SettingProcessorTest {
                 "꽝,성공,꽝,꽝,뭐야이건\n" +
                 "10\n";
         final List<Setting> settings = Arrays.asList(
-                Setting.of(NAME, "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"),
-                Setting.of(RESULT, "실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)"),
-                Setting.of(MAX_HEIGHT, "최대 사다리 높이는 몇 개인가요?")
+                Setting.NAME,
+                Setting.RESULT,
+                Setting.MAX_HEIGHT
         );
 
         //when
