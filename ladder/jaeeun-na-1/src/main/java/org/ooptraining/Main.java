@@ -57,7 +57,7 @@ public class Main {
                 final String input = sc.nextLine();
                 log.info(">>> " + input);
                 if (input.equalsIgnoreCase("!bye")) {
-                    System.out.print("bye!");
+                    System.out.println("bye!");
                     return;
                 }
                 System.out.println("실행 결과");
