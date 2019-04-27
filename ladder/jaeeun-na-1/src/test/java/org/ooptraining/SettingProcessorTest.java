@@ -71,8 +71,9 @@ class SettingProcessorTest {
         simulateStandardInputOutput(input);
         final SettingProcessor processor = SettingProcessor.of(System.in);
 
+        //then
         assertThrows(IllegalStateException.class, () -> {
-            final SettingContext context = processor.run(settings);
+            processor.run(settings);
         });
     }
 }

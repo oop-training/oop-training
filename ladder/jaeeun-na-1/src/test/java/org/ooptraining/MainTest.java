@@ -1,5 +1,6 @@
 package org.ooptraining;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.OutputStream;
@@ -7,9 +8,11 @@ import java.io.OutputStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.ooptraining.util.IOUtils.simulateStandardInputOutput;
 
-public class MainTest {
+@DisplayName("Ladder Program")
+class MainTest {
     @Test
-    void std_input_test1() {
+    @DisplayName("should satisfy requirements")
+    void total_test() {
         //given
         final String input = "pobi,honux,crong,jk\n" +
                 "꽝,5000,꽝,3000\n" +
