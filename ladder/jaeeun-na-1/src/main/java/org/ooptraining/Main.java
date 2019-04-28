@@ -1,7 +1,10 @@
 package org.ooptraining;
 
 import lombok.extern.java.Log;
+import org.ooptraining.render.RenderContext;
+import org.ooptraining.render.Renderer;
 import org.ooptraining.setting.Setting;
+import org.ooptraining.setting.SettingContext;
 import org.ooptraining.setting.SettingProcessor;
 
 import java.util.Arrays;
@@ -12,16 +15,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final Scanner sc = new Scanner(System.in);
-        final List<String> resultMessages = Arrays.asList(
-                "사다리 결과",
-                "pobi    honux   crong   jk\n" +
-                        "|-------|       |-------|\n" +
-                        "|       |-------|       |\n" +
-                        "|-------|       |       |\n" +
-                        "|       |-------|       |\n" +
-                        "|-------|       |-------|\n" +
-                        "꽝       5000    꽝      3000\n"
-        );
         final List<String> queryMessages = Arrays.asList(
                 "결과를 보고 싶은 사람은?"
         );
@@ -33,18 +26,22 @@ public class Main {
                         "jk : 5000\n"
         );
 
-
-        SettingProcessor settingProcessor = SettingProcessor.of(sc);
-        settingProcessor.run(Arrays.asList(
+        final SettingProcessor settingProcessor = SettingProcessor.of(sc);
+        final SettingContext settingContext = settingProcessor.run(Arrays.asList(
                 Setting.NAME,
                 Setting.RESULT,
                 Setting.MAX_HEIGHT
         ));
 
         System.out.println();
-        resultMessages.forEach(m -> {
-            System.out.println(m);
-        });
+        System.out.println("사다리 결과");
+        final Renderer renderer = new Renderer();
+        final String renderResult = renderer.render(settingContext, RenderContext.builder()
+                .intervalWidth(7)
+                .maxNameLength(7)
+                .build());
+        System.out.println(renderResult);
+        System.out.println();
 
         int i = 0;
         while (true) {
