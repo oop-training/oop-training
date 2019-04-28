@@ -2,6 +2,7 @@ package org.ooptraining;
 
 import lombok.extern.java.Log;
 import org.ooptraining.render.RenderContext;
+import org.ooptraining.render.RenderPolicy;
 import org.ooptraining.render.Renderer;
 import org.ooptraining.setting.Setting;
 import org.ooptraining.setting.SettingContext;
@@ -35,11 +36,12 @@ public class Main {
 
         System.out.println();
         System.out.println("사다리 결과");
-        final Renderer renderer = new Renderer();
-        final String renderResult = renderer.render(settingContext, RenderContext.builder()
+        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
+        final RenderContext renderContext = RenderContext.builder()
                 .intervalWidth(7)
                 .maxNameLength(7)
-                .build());
+                .build();
+        final String renderResult = renderer.render(settingContext, renderContext);
         System.out.println(renderResult);
         System.out.println();
 

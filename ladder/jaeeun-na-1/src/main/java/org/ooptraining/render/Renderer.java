@@ -1,18 +1,15 @@
 package org.ooptraining.render;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.ooptraining.setting.SettingContext;
 
 @Log
+@RequiredArgsConstructor(staticName = "of")
 public class Renderer {
-    private RenderPolicy renderPolicy = RenderPolicy.DEFAULT;
+    private final RenderPolicy renderPolicy;
 
-    public Renderer with(final RenderPolicy renderPolicy) {
-        this.renderPolicy = renderPolicy;
-        return this;
-    }
-
-    public String render(final SettingContext settingContext, final RenderContext renderContext ) {
+    public String render(final SettingContext settingContext, final RenderContext renderContext) {
         return renderPolicy.render(settingContext, renderContext);
     }
 }

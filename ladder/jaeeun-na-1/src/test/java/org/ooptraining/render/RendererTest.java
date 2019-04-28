@@ -24,7 +24,7 @@ class RendererTest {
         final SettingContext settingContext = SettingContext.builder()
                 .participants(participants)
                 .maxHeight(5).build();
-        final Renderer renderer = new Renderer();
+        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
         final RenderContext renderContext = RenderContext.builder()
                 .intervalWidth(8)
                 .maxNameLength(7).build();
@@ -57,7 +57,7 @@ class RendererTest {
         final RenderContext renderContext = RenderContext.builder()
                 .intervalWidth(7)
                 .maxNameLength(5).build();
-        final Renderer renderer = new Renderer();
+        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
 
 
         final String ladderResult = renderer.render(settingContext, renderContext);
@@ -91,7 +91,7 @@ class RendererTest {
         final RenderContext renderContext = RenderContext.builder()
                 .intervalWidth(4)
                 .maxNameLength(4).build();
-        final Renderer renderer = new Renderer();
+        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
 
         final String ladderResult = renderer.render(settingContext, renderContext);
 
