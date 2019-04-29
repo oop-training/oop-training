@@ -19,8 +19,6 @@ public class Ladder {
         this.inputUtil = new InputUtil();
         this.outputUtil = new OutputUtil();
         this.renderUtil = new RenderUtil();
-
-        this.resultMap = new HashMap<>();
     }
 
     public void play() {
