@@ -4,7 +4,9 @@ import lombok.*;
 import org.ooptraining.Participant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class SettingContext {
@@ -17,6 +19,23 @@ public class SettingContext {
 
     public static SettingContext.Builder builder() {
         return new Builder();
+    }
+
+    public SettingContext toSwap(int leftIndex, int rightIndex) {
+        if (leftIndex < 0 || rightIndex >= participants.size()) {
+            throw new IllegalArgumentException("invalid index for SettingContext");
+        }
+
+        final List<Participant> newParticipants = participants.stream()
+                .map(Participant::clone)
+                .collect(Collectors.toList());
+
+        final Participant left = newParticipants.get(leftIndex);
+        final Participant right = newParticipants.get(rightIndex);
+        newParticipants.set(leftIndex, right);
+        newParticipants.set(rightIndex, left);
+
+        return SettingContext.builder().participants(newParticipants).build();
     }
 
     public static class Builder {
