@@ -1,6 +1,7 @@
 package org.ooptraining.render;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;
 import org.ooptraining.setting.SettingContext;
@@ -91,9 +92,10 @@ class RendererTest {
         final RenderContext renderContext = RenderContext.builder()
                 .intervalWidth(4)
                 .maxNameLength(4).build();
-        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
+        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT)
+                .with(renderContext);
 
-        final String ladderResult = renderer.render(settingContext, renderContext);
+        final String ladderResult = renderer.render(settingContext);
 
         final String expectedLadder =
                 "a    so.. c    d    e    f\n" +

@@ -36,11 +36,11 @@ public class Main {
 
         System.out.println();
         System.out.println("사다리 결과");
-        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
         final RenderContext renderContext = RenderContext.builder()
                 .intervalWidth(7)
                 .maxNameLength(7)
                 .build();
+        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
         final String renderResult = renderer.render(settingContext, renderContext);
         System.out.println(renderResult);
         System.out.println();
