@@ -1,30 +1,40 @@
 package org.ooptraining.render.policy;
 
+import lombok.RequiredArgsConstructor;
 import org.ooptraining.Participant;
 import org.ooptraining.render.RenderContext;
 import org.ooptraining.render.RenderPolicy;
 import org.ooptraining.setting.SettingContext;
 
 import java.util.List;
-import java.util.Random;
 
 import static org.ooptraining.util.StringUtils.*;
-import static org.ooptraining.util.StringUtils.padding;
 
+@RequiredArgsConstructor(staticName = "of")
 public class RandomRenderPolicy implements RenderPolicy {
+    private final RandomBoolean random;
+
+    private SettingContext lastSettingContext;
+
     @Override
     public String render(final SettingContext settingContext, final RenderContext renderContext) {
         return render(new StringBuilder(), settingContext, renderContext);
     }
 
     private String render(final StringBuilder builder, final SettingContext settingContext, final RenderContext renderContext) {
+        lastSettingContext = settingContext;
+
         builder.append(renderParticipants(settingContext, renderContext));
-        builder.append("\n");
+        builder.append(blankLine());
         builder.append(renderLadders(settingContext, renderContext));
-        builder.append("\n");
-        builder.append(renderResult(settingContext, renderContext));
+        builder.append(blankLine());
+        builder.append(renderResult(lastSettingContext, renderContext));
 
         return builder.toString().trim();
+    }
+
+    private static String blankLine() {
+        return "\n";
     }
 
     private String renderParticipants(final SettingContext settingContext, final RenderContext renderContext) {
@@ -58,19 +68,19 @@ public class RandomRenderPolicy implements RenderPolicy {
         final int numberOfParticipants = settingContext.getParticipants().size();
 
         for (int i = 0; i < numberOfParticipants - 1; i++) {
-            builder.append(renderLadderCol(renderContext));
+            builder.append(renderLadderCol(i, renderContext));
         }
         builder.append("|");
         return builder.toString().trim();
     }
 
-    private String renderLadderCol(final RenderContext renderContext) {
-        return "|" + paddingOrLine(renderContext);
+    private String renderLadderCol(final int index, final RenderContext renderContext) {
+        return "|" + paddingOrLine(index, renderContext);
     }
 
-    private String paddingOrLine(final RenderContext renderContext) {
-        final int number = new Random().nextInt();
-        if (number % 2 == 0) {
+    private String paddingOrLine(final int index, final RenderContext renderContext) {
+        if (random.nextBoolean()) {
+            lastSettingContext = lastSettingContext.toSwap(index, index + 1);
             return line(renderContext.getIntervalWidth());
         }
         return padding(renderContext.getIntervalWidth());
