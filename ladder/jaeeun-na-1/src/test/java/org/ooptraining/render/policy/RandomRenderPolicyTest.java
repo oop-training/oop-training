@@ -1,5 +1,6 @@
 package org.ooptraining.render.policy;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;
 import org.ooptraining.render.Renderer;
@@ -12,8 +13,10 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("RandomRenderPolicy")
 class RandomRenderPolicyTest {
     @Test
+    @DisplayName("can render all horizontally line")
     void random_test1() {
         final SettingContext settingContext = SettingContext.builder()
                 .participants(Arrays.asList(
@@ -45,6 +48,7 @@ class RandomRenderPolicyTest {
     }
 
     @Test
+    @DisplayName("can render no line")
     void random_test2() {
         final SettingContext settingContext = SettingContext.builder()
                 .participants(Arrays.asList(
@@ -76,6 +80,7 @@ class RandomRenderPolicyTest {
     }
 
     @Test
+    @DisplayName("can render line for one by one column")
     void random_test3() {
         final SettingContext settingContext = SettingContext.builder()
                 .participants(Arrays.asList(
@@ -107,6 +112,7 @@ class RandomRenderPolicyTest {
     }
 
     @Test
+    @DisplayName("should match correct name-result pair")
     void random_test4() {
         final SettingContext settingContext = SettingContext.builder()
                 .participants(Arrays.asList(
@@ -145,6 +151,7 @@ class RandomRenderPolicyTest {
     }
 
     @Test
+    @DisplayName("should match correct name-result pair in more complicate (2 lines)")
     void random_test5() {
         final SettingContext settingContext = SettingContext.builder()
                 .participants(Arrays.asList(
@@ -183,6 +190,7 @@ class RandomRenderPolicyTest {
     }
 
     @Test
+    @DisplayName("should match correct name-result pair in more complicate (3 lines)")
     void random_test6() {
         final SettingContext settingContext = SettingContext.builder()
                 .participants(Arrays.asList(
