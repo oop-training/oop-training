@@ -1,5 +1,8 @@
+import util.Ladder;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello OOP!");
+        Ladder ladder = new Ladder();
+        ladder.play();
     }
 }
