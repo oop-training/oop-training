@@ -45,6 +45,7 @@ public class Main {
         System.out.println(renderResult);
         System.out.println();
 
+        // TODO: 마지막 사용자 query받는 부분 설계 및 구현
         int i = 0;
         while (true) {
             for (String m : queryMessages) {
@@ -58,5 +59,7 @@ public class Main {
                 System.out.println(queryResponse.get(i++));
             }
         }
+
+        // TODO: 마무리 정리 작업 (메시징, 코드 이름, ...)
     }
 }
