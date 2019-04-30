@@ -16,16 +16,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final Scanner sc = new Scanner(System.in);
-        final List<String> queryMessages = Arrays.asList(
-                "결과를 보고 싶은 사람은?"
-        );
-        final List<String> queryResponse = Arrays.asList(
-                "꽝\n",
-                "pobi : 꽝\n" +
-                        "honux : 3000\n" +
-                        "crong : 꽝\n" +
-                        "jk : 5000\n"
-        );
 
         // TODO: input, output을 injection
         //  반드시 stdin,out말고 file이나 http call 일 수도 있음.
@@ -48,6 +38,16 @@ public class Main {
         System.out.println(renderResult);
         System.out.println();
 
+        final List<String> queryMessages = Arrays.asList(
+                "결과를 보고 싶은 사람은?"
+        );
+        final List<String> queryResponse = Arrays.asList(
+                "꽝\n",
+                "pobi : 꽝\n" +
+                        "honux : 3000\n" +
+                        "crong : 꽝\n" +
+                        "jk : 5000\n"
+        );
         // TODO: 마지막 사용자 query받는 부분 설계 및 구현
         int i = 0;
         while (true) {

@@ -1,10 +1,9 @@
 package org.ooptraining.setting;
 
-import lombok.*;
+import lombok.Getter;
 import org.ooptraining.Participant;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,9 +38,14 @@ public class SettingContext {
     }
 
     public static class Builder {
-        private SettingContext instance = new SettingContext();
+        private SettingContext instance;
         private List<String> names = new ArrayList<>();
         private List<String> results = new ArrayList<>();
+
+        Builder() {
+            instance = new SettingContext();
+            instance.maxHeight = 5;
+        }
 
         public SettingContext build() {
             if (names.size() != results.size()) {
