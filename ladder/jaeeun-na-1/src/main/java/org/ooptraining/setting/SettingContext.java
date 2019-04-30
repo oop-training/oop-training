@@ -1,6 +1,7 @@
 package org.ooptraining.setting;
 
 import lombok.Getter;
+import lombok.ToString;
 import org.ooptraining.Participant;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
+@ToString
 public class SettingContext {
     private List<Participant> participants;
     private int maxHeight;
