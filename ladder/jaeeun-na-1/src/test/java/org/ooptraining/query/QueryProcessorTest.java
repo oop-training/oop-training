@@ -1,33 +1,32 @@
 package org.ooptraining.query;
 
-import org.junit.jupiter.api.Test;
-import org.ooptraining.Participant;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.ooptraining.setting.SettingContext;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.ooptraining.util.StringUtils.makeFullResultWithNameAndResult;
 
+@DisplayName("QueryProcessor")
 class QueryProcessorTest {
-    @Test
-    void query_test_1() {
-        final SettingContext context = SettingContext.builder()
-                .participants(Arrays.asList(
-                        Participant.of("abcd", "1234"),
-                        Participant.of("efgh", "5678"),
-                        Participant.of("hello", "world")
-                        )
-                )
-                .maxHeight(5).build();
-        final QueryProcessor queryProcessor = QueryProcessor.of(context);
+    private static final String source1 = "org.ooptraining.util.dummy.data.SettingContextDummys#data1";
 
+    @Nested
+    @DisplayName("can handle")
+    class Handle {
 
-        final QueryResult queryResult = queryProcessor.execute(QueryCommand.SHOW_ALL);
+        @DisplayName("SHOW_ALL command")
+        @ParameterizedTest(name = "{arguments}-{index}")
+        @MethodSource(source1)
+        void query_test_1(final SettingContext settingContext) {
+            final QueryProcessor queryProcessor = QueryProcessor.of(settingContext);
 
+            final QueryResult queryResult = queryProcessor.execute(QueryCommand.SHOW_ALL);
 
-        final String expected = "abcd : 1234\n" +
-                "efgh : 5678\n" +
-                "hello : world";
-        assertThat(queryResult.asString()).isEqualTo(expected);
+            final String expected = makeFullResultWithNameAndResult(settingContext);
+            assertThat(queryResult.asString()).isEqualTo(expected);
+        }
     }
 }
