@@ -1,5 +1,10 @@
 package org.ooptraining.util;
 
+import org.ooptraining.Participant;
+import org.ooptraining.setting.SettingContext;
+
+import static java.text.MessageFormat.format;
+
 public class StringUtils {
     public static String padding(final int paddingSize) {
         return generate(paddingSize, ' ');
@@ -18,6 +23,21 @@ public class StringUtils {
             return name;
         }
         return name.substring(0, maxNameLength - 2) + "..";
+    }
+
+    public static String makeFullResultWithNameAndResult(final SettingContext settingContext) {
+        final StringBuilder sb = new StringBuilder();
+
+        settingContext.getParticipants().forEach(p -> {
+            makeResultWithNameAndResult(p);
+            sb.append("\n");
+        });
+
+        return sb.toString().trim();
+    }
+
+    public static String makeResultWithNameAndResult(final Participant participant) {
+        return format("{0} : {1}", participant.getName(), participant.getResult());
     }
 
     private static String generate(final int size, final char ch) {
