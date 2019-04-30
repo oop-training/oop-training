@@ -15,8 +15,8 @@ public class SettingProcessor {
         final SettingContext.Builder builder = SettingContext.builder();
 
         settings.forEach(setting -> {
-            final String line = sc.nextLine();
             System.out.println(setting.getInputMessages());
+            final String line = sc.nextLine();
             setting.parse(line, builder);
         });
 
