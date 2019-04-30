@@ -10,4 +10,8 @@ public class QueryProcessor {
     public QueryResult execute(final QueryCommand queryCommand) {
         return queryCommand.execute(settingContext);
     }
+
+    public QueryResult execute(final QueryCommand queryCommand, final QueryArgument queryArgument) {
+        return queryCommand.execute(settingContext, queryArgument);
+    }
 }
