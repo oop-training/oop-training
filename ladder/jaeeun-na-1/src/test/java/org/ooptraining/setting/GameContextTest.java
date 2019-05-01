@@ -74,7 +74,8 @@ class GameContextTest {
                             Participant.of("hello", "4"),
                             Participant.of("world", "5")
                     )).build();
-            final GameContext swappedContext = context.toSwap(0, 6);
+
+            context.toSwap(0, 6);
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -87,7 +88,8 @@ class GameContextTest {
                             Participant.of("hello", "4"),
                             Participant.of("world", "5")
                     )).build();
-            final GameContext swappedContext = context.toSwap(-1, 6);
+
+            context.toSwap(-1, 6);
         });
     }
 }

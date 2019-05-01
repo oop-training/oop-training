@@ -9,7 +9,6 @@ import org.ooptraining.util.IOUtils;
 
 import java.io.OutputStream;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,7 +26,6 @@ class QueryProcessorTest {
                         "@bye\n";
         final OutputStream output = IOUtils.simulateStandardInputOutput(input);
 
-        final Scanner sc = new Scanner(System.in);
         final GameContext gameContext = GameContext.builder()
                 .participants(Arrays.asList(
                         Participant.of("name1", "result1"),
