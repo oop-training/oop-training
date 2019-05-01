@@ -2,6 +2,7 @@ package org.ooptraining;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.ooptraining.io.StandardInputOutput;
 import org.ooptraining.setting.GameContext;
 import org.ooptraining.setting.GameContextProcessor;
 import org.ooptraining.setting.Setting;
@@ -9,7 +10,6 @@ import org.ooptraining.setting.Setting;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,7 +32,7 @@ class GameContextProcessorTest {
 
         //when
         final OutputStream out = simulateStandardInputOutput(input);
-        final GameContextProcessor processor = GameContextProcessor.of(new Scanner(System.in));
+        final GameContextProcessor processor = GameContextProcessor.of(new StandardInputOutput());
         final GameContext context = processor.run(settings);
 
         //then
@@ -69,7 +69,7 @@ class GameContextProcessorTest {
 
         //when
         simulateStandardInputOutput(input);
-        final GameContextProcessor processor = GameContextProcessor.of(new Scanner(System.in));
+        final GameContextProcessor processor = GameContextProcessor.of(new StandardInputOutput());
 
         //then
         assertThrows(IllegalStateException.class, () -> {

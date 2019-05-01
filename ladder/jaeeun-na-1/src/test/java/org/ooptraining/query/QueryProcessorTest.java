@@ -3,6 +3,7 @@ package org.ooptraining.query;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;
+import org.ooptraining.io.StandardInputOutput;
 import org.ooptraining.setting.GameContext;
 import org.ooptraining.util.IOUtils;
 
@@ -39,7 +40,7 @@ class QueryProcessorTest {
                 )
                 .maxHeight(5).build();
 
-        final QueryProcessor queryProcessor = QueryProcessor.of(sc);
+        final QueryProcessor queryProcessor = QueryProcessor.of(new StandardInputOutput());
 
         queryProcessor.run(gameContext);
 
