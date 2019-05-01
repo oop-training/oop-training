@@ -1,13 +1,12 @@
 package org.ooptraining.render.policy;
 
-import org.ooptraining.model.Participant;
+import org.ooptraining.game.GameContext;
 import org.ooptraining.render.RenderContext;
 import org.ooptraining.render.RenderPolicy;
-import org.ooptraining.game.GameContext;
 
-import java.util.List;
-
-import static org.ooptraining.util.StringUtils.*;
+import static org.ooptraining.util.RenderUtils.renderParticipants;
+import static org.ooptraining.util.RenderUtils.renderResult;
+import static org.ooptraining.util.StringUtils.padding;
 
 public class OneLineRenderPolicy implements RenderPolicy {
     @Override
@@ -21,22 +20,6 @@ public class OneLineRenderPolicy implements RenderPolicy {
         builder.append(renderLadders(gameContext, renderContext));
         builder.append("\n");
         builder.append(renderResult(gameContext, renderContext));
-
-        return builder.toString().trim();
-    }
-
-    private String renderParticipants(final GameContext gameContext, final RenderContext renderContext) {
-        final List<Participant> participants = gameContext.getParticipants();
-        final StringBuilder builder = new StringBuilder();
-
-        participants.forEach(participant -> {
-            final String name = normalize(participant.getName(), renderContext.getMaxNameLength());
-            final int remainPaddingSize = getRemainPadding(name, renderContext.getIntervalWidth() + 1);
-
-            builder.append(name);
-            builder.append(padding(remainPaddingSize));
-        });
-        builder.append("\n");
 
         return builder.toString().trim();
     }
@@ -68,20 +51,5 @@ public class OneLineRenderPolicy implements RenderPolicy {
 
     private String paddingOrLine(final RenderContext renderContext) {
         return padding(renderContext.getIntervalWidth());
-    }
-
-    private String renderResult(final GameContext gameContext, final RenderContext renderContext) {
-        final List<Participant> participants = gameContext.getParticipants();
-        final StringBuilder builder = new StringBuilder();
-
-        participants.forEach(participant -> {
-            final String result = normalize(participant.getResult(), renderContext.getMaxNameLength());
-            final int remainPaddingSize = getRemainPadding(result, renderContext.getIntervalWidth() + 1);
-
-            builder.append(result);
-            builder.append(padding(remainPaddingSize));
-        });
-
-        return builder.toString().trim();
     }
 }
