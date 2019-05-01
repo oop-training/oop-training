@@ -1,7 +1,7 @@
 package org.ooptraining.util.dummy.data;
 
 import org.junit.jupiter.params.provider.Arguments;
-import org.ooptraining.game.Participant;
+import org.ooptraining.model.Participant;
 import org.ooptraining.game.GameContext;
 
 import java.util.stream.Stream;

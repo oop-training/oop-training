@@ -2,7 +2,7 @@ package org.ooptraining.render;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.ooptraining.game.Participant;
+import org.ooptraining.model.Participant;
 import org.ooptraining.game.GameContext;
 
 import java.util.Arrays;

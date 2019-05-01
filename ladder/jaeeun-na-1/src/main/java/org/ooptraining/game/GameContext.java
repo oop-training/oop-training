@@ -2,6 +2,7 @@ package org.ooptraining.game;
 
 import lombok.Getter;
 import lombok.ToString;
+import org.ooptraining.model.Participant;
 
 import java.util.ArrayList;
 import java.util.List;

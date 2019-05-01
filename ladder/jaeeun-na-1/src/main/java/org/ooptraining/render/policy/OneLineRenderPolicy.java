@@ -1,6 +1,6 @@
 package org.ooptraining.render.policy;
 
-import org.ooptraining.game.Participant;
+import org.ooptraining.model.Participant;
 import org.ooptraining.render.RenderContext;
 import org.ooptraining.render.RenderPolicy;
 import org.ooptraining.game.GameContext;

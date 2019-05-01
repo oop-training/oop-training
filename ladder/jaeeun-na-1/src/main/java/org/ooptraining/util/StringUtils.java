@@ -1,6 +1,6 @@
 package org.ooptraining.util;
 
-import org.ooptraining.game.Participant;
+import org.ooptraining.model.Participant;
 import org.ooptraining.game.GameContext;
 
 import static java.text.MessageFormat.format;
