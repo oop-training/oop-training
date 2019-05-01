@@ -3,9 +3,9 @@ package org.ooptraining.render.policy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.ooptraining.game.GameContext;
 import org.ooptraining.model.Participant;
 import org.ooptraining.render.Renderer;
-import org.ooptraining.game.GameContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,12 +43,12 @@ class RandomRenderPolicyTest {
 
             final String expected =
                             "abc     123     efg     456\n" +
-                            "|-------|-------|-------|\n" +
-                            "|-------|-------|-------|\n" +
-                            "|-------|-------|-------|\n" +
-                            "|-------|-------|-------|\n" +
-                            "|-------|-------|-------|\n" +
-                            "O       X       X       X";
+                            "|-------|       |-------|\n" +
+                            "|       |-------|       |\n" +
+                            "|-------|       |-------|\n" +
+                            "|       |-------|       |\n" +
+                            "|-------|       |-------|\n" +
+                            "X       X       X       O";
             assertThat(ladder).isEqualTo(expected);
         }
 
