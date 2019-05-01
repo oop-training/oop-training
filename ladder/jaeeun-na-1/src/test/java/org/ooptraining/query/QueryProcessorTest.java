@@ -69,7 +69,7 @@ class QueryProcessorTest {
     }
 
     @Test
-    @DisplayName("can throw exception when invalid use in show command")
+    @DisplayName("can throw exception when invalid use in SHOW command")
     void run_no_name_1() {
         final String input =
                 "name1\n" +
