@@ -69,7 +69,7 @@ class QueryProcessorTest {
 
     @Test
     @DisplayName("no name")
-    void run_no_name_2() {
+    void run_no_name_1() {
         final String input =
                 "name1\n" +
                         "name2\n" +
@@ -105,4 +105,46 @@ class QueryProcessorTest {
 
         assertThat(output.toString()).isEqualTo(expected);
     }
+
+    // 현재로서는 SHOW_ALL 이 아닌 다른 커맨드는 모두 SHOW로 간주하기 때문에
+    // 테스트하기 어려움.
+    // 추후에 Command에 대한 일반적인 방식을 정의 한 뒤에 가능
+//    @Test
+//    @DisplayName("invalid command")
+//    void run_invalid_command() {
+//        final String input =
+//                "name1\n" +
+//                        "name2\n" +
+//                        "@invalid_command\n" +
+//                        "@bye\n";
+//        final OutputStream output = IOUtils.simulateStandardInputOutput(input);
+//
+//        final GameContext gameContext = GameContext.builder()
+//                .participants(Arrays.asList(
+//                        Participant.of("name1", "result1"),
+//                        Participant.of("name2", "result2"),
+//                        Participant.of("name3", "result3")
+//                        )
+//                )
+//                .maxHeight(5).build();
+//
+//        final QueryProcessor queryProcessor = QueryProcessor.of(new StandardInputOutput());
+//
+//        queryProcessor.run(gameContext);
+//
+//        final String expected =
+//                "결과를 보고 싶은 사람은?\n" +
+//                        "실행 결과\n" +
+//                        "result1\n\n" +
+//                        "결과를 보고 싶은 사람은?\n" +
+//                        "실행 결과\n" +
+//                        "result2\n\n" +
+//                        "결과를 보고 싶은 사람은?\n" +
+//                        "실행 결과\n" +
+//                        "Invalid Command. try @all, @exit, ...n\n" +
+//                        "결과를 보고 싶은 사람은?\n" +
+//                        "bye!\n";
+//
+//        assertThat(output.toString()).isEqualTo(expected);
+//    }
 }
