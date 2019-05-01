@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;
 import org.ooptraining.render.Renderer;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 
 import java.util.Arrays;
 import java.util.List;

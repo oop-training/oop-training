@@ -1,4 +1,4 @@
-package org.ooptraining.setting;
+package org.ooptraining.game;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;

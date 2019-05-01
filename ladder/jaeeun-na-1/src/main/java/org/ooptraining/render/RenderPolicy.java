@@ -1,7 +1,7 @@
 package org.ooptraining.render;
 
 import org.ooptraining.render.policy.OneLineRenderPolicy;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 
 public interface RenderPolicy {
     RenderPolicy DEFAULT = new OneLineRenderPolicy();

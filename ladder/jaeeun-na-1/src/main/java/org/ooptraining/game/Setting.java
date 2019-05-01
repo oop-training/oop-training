@@ -1,10 +1,10 @@
-package org.ooptraining.setting;
+package org.ooptraining.game;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.ooptraining.setting.parser.MaxHeightParser;
-import org.ooptraining.setting.parser.NameParser;
-import org.ooptraining.setting.parser.ResultParser;
+import org.ooptraining.game.parser.MaxHeightParser;
+import org.ooptraining.game.parser.NameParser;
+import org.ooptraining.game.parser.ResultParser;
 
 @Getter
 @RequiredArgsConstructor

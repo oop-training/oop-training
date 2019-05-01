@@ -1,7 +1,7 @@
 package org.ooptraining.util;
 
 import org.ooptraining.Participant;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 
 import static java.text.MessageFormat.format;
 

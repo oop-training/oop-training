@@ -1,7 +1,7 @@
 package org.ooptraining.render;
 
 import lombok.RequiredArgsConstructor;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 
 @RequiredArgsConstructor(staticName = "of")
 public class Renderer {

@@ -8,9 +8,9 @@ import org.ooptraining.render.RenderPolicy;
 import org.ooptraining.render.Renderer;
 import org.ooptraining.render.policy.DefaultRandom;
 import org.ooptraining.render.policy.RandomRenderPolicy;
-import org.ooptraining.setting.GameContext;
-import org.ooptraining.setting.GameContextProcessor;
-import org.ooptraining.setting.Setting;
+import org.ooptraining.game.GameContext;
+import org.ooptraining.game.GameContextProcessor;
+import org.ooptraining.game.Setting;
 
 import java.util.Arrays;
 

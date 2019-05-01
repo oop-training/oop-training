@@ -1,7 +1,7 @@
-package org.ooptraining.setting.parser;
+package org.ooptraining.game.parser;
 
-import org.ooptraining.setting.GameContext;
-import org.ooptraining.setting.Parser;
+import org.ooptraining.game.GameContext;
+import org.ooptraining.game.Parser;
 
 public class ResultParser implements Parser {
     @Override

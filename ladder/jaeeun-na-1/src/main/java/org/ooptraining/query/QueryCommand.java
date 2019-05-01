@@ -4,7 +4,7 @@ import org.ooptraining.exception.IllegalQueryCommandException;
 import org.ooptraining.exception.QueryProcessorExitException;
 import org.ooptraining.query.argument.DefaultQueryCommandArgument;
 import org.ooptraining.query.argument.ShowQueryCommandArgument;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 
 import java.util.Arrays;
 import java.util.Map;

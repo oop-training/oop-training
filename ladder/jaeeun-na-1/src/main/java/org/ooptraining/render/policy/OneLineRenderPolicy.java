@@ -3,7 +3,7 @@ package org.ooptraining.render.policy;
 import org.ooptraining.Participant;
 import org.ooptraining.render.RenderContext;
 import org.ooptraining.render.RenderPolicy;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 
 import java.util.List;
 

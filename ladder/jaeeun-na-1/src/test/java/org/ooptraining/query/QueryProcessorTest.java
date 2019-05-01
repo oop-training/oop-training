@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;
 import org.ooptraining.io.StandardInputOutput;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 import org.ooptraining.util.IOUtils;
 
 import java.io.OutputStream;

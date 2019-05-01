@@ -3,9 +3,9 @@ package org.ooptraining;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.io.StandardInputOutput;
-import org.ooptraining.setting.GameContext;
-import org.ooptraining.setting.GameContextProcessor;
-import org.ooptraining.setting.Setting;
+import org.ooptraining.game.GameContext;
+import org.ooptraining.game.GameContextProcessor;
+import org.ooptraining.game.Setting;
 
 import java.io.OutputStream;
 import java.util.Arrays;

@@ -3,7 +3,7 @@ package org.ooptraining.query;
 import lombok.RequiredArgsConstructor;
 import org.ooptraining.exception.QueryProcessorExitException;
 import org.ooptraining.io.IO;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 
 import java.util.HashMap;
 import java.util.Map;

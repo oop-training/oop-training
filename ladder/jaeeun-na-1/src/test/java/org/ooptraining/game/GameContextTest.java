@@ -1,4 +1,4 @@
-package org.ooptraining.setting;
+package org.ooptraining.game;
 
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;

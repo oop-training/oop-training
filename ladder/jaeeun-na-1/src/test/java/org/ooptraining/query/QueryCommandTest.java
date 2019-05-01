@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.ooptraining.exception.IllegalQueryCommandException;
 import org.ooptraining.query.argument.ShowQueryCommandArgument;
-import org.ooptraining.setting.GameContext;
+import org.ooptraining.game.GameContext;
 import org.ooptraining.util.dummy.data.SettingContextDummys;
 
 import static org.assertj.core.api.Assertions.assertThat;
