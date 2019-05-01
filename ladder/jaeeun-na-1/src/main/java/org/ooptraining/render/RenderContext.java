@@ -7,8 +7,8 @@ import lombok.Getter;
 @Builder
 public class RenderContext {
     public static RenderContext DEFAULT = RenderContext.builder()
-            .intervalWidth(8)
-            .maxNameLength(8)
+            .intervalWidth(7)
+            .maxNameLength(7)
             .build();
 
     private int maxNameLength;

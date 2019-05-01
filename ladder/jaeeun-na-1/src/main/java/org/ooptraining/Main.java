@@ -7,9 +7,9 @@ import org.ooptraining.render.RenderPolicy;
 import org.ooptraining.render.Renderer;
 import org.ooptraining.render.policy.DefaultRandom;
 import org.ooptraining.render.policy.RandomRenderPolicy;
-import org.ooptraining.setting.Setting;
 import org.ooptraining.setting.GameContext;
 import org.ooptraining.setting.GameContextProcessor;
+import org.ooptraining.setting.Setting;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -38,18 +38,18 @@ public class Main {
                 Setting.MAX_HEIGHT
         ));
 
-        final RenderContext renderContext = RenderContext.builder()
-                .intervalWidth(7)
-                .maxNameLength(7)
-                .build();
         final Renderer renderer = Renderer.of(renderPolicy);
-        final String renderResult = renderer.render(gameContext, renderContext);
+        final String renderResult = renderer.render(gameContext);
+        printFormattedRenderResult(renderResult);
+
+        final QueryProcessor queryProcessor = QueryProcessor.of(sc);
+        queryProcessor.run(gameContext);
+    }
+
+    private static void printFormattedRenderResult(final String renderResult) {
         System.out.println();
         System.out.println("사다리 결과");
         System.out.println(renderResult);
         System.out.println();
-
-        final QueryProcessor queryProcessor = QueryProcessor.of(sc);
-        queryProcessor.run(gameContext);
     }
 }
