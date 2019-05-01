@@ -6,6 +6,7 @@ import org.ooptraining.Participant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Getter
@@ -37,6 +38,10 @@ public class SettingContext {
         newParticipants.set(rightIndex, left);
 
         return SettingContext.builder().participants(newParticipants).build();
+    }
+
+    public Map<String, String> toParticipantMap() {
+        return participants.stream().collect(Collectors.toMap(Participant::getName, Participant::getResult));
     }
 
     public static class Builder {

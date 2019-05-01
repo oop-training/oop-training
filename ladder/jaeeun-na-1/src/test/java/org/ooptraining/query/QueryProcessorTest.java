@@ -1,74 +1,70 @@
 package org.ooptraining.query;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.ooptraining.exception.IllegalQueryCommandException;
-import org.ooptraining.query.argument.ShowQueryCommandArgument;
+import org.ooptraining.Participant;
 import org.ooptraining.setting.SettingContext;
-import org.ooptraining.util.dummy.data.SettingContextDummys;
+import org.ooptraining.util.IOUtils;
+
+import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.ooptraining.util.StringUtils.makeFullResultWithNameAndResult;
 
 @DisplayName("QueryProcessor")
 class QueryProcessorTest {
-    @Nested
-    @DisplayName("can handle")
-    class Handle {
+    @Test
+    void run_test_1() {
+        final String input =
+                "name1\n" +
+                        "name2\n" +
+                        "name4\n" +
+                        "name3\n" +
+                        "name2\n" +
+                        "name6\n" +
+                        "@bye\n";
+        final OutputStream output = IOUtils.simulateStandardInputOutput(input);
 
-        @DisplayName("SHOW_ALL command")
-        @ParameterizedTest(name = "[{index}]-{arguments}")
-        @MethodSource("org.ooptraining.util.dummy.data.SettingContextDummys#data1")
-        void query_test_show_all_command(final SettingContext settingContext) {
-            final QueryProcessor queryProcessor = QueryProcessor.of(settingContext);
+        final Scanner sc = new Scanner(System.in);
+        final SettingContext settingContext = SettingContext.builder()
+                .participants(Arrays.asList(
+                        Participant.of("name1", "result1"),
+                        Participant.of("name2", "result2"),
+                        Participant.of("name3", "result3"),
+                        Participant.of("name4", "result4"),
+                        Participant.of("name5", "result5"),
+                        Participant.of("name6", "result6")
+                        )
+                )
+                .maxHeight(5).build();
 
-            final QueryResult queryResult = queryProcessor.execute(QueryCommand.SHOW_ALL);
+        final QueryProcessor queryProcessor = QueryProcessor.of(sc);
 
-            final String expected = makeFullResultWithNameAndResult(settingContext);
-            assertThat(queryResult.asString()).isEqualTo(expected);
-        }
+        queryProcessor.run(settingContext);
 
-        @DisplayName("SHOW command (specific name-result)")
-        @ParameterizedTest(name = "[{index}]-{arguments}")
-        @MethodSource("org.ooptraining.util.dummy.data.SettingContextDummys#participantList_queryName_expectedResult")
-        void query_test_show_command(final SettingContext settingContext, final String queryName, final String expectedResult) {
-            final QueryProcessor queryProcessor = QueryProcessor.of(settingContext);
-            final QueryArgument queryArgument = ShowQueryCommandArgument.of(queryName);
+        final String expected =
+                "결과를 보고 싶은 사람은?\n" +
+                        "실행 결과\n" +
+                        "result1\n\n" +
+                        "결과를 보고 싶은 사람은?\n" +
+                        "실행 결과\n" +
+                        "result2\n\n" +
+                        "결과를 보고 싶은 사람은?\n" +
+                        "실행 결과\n" +
+                        "result4\n\n" +
+                        "결과를 보고 싶은 사람은?\n" +
+                        "실행 결과\n" +
+                        "result3\n\n" +
+                        "결과를 보고 싶은 사람은?\n" +
+                        "실행 결과\n" +
+                        "result2\n\n" +
+                        "결과를 보고 싶은 사람은?\n" +
+                        "실행 결과\n" +
+                        "result6\n\n" +
+                        "결과를 보고 싶은 사람은?\n" +
+                        "bye!\n";
 
-            final QueryResult queryResult = queryProcessor.execute(QueryCommand.SHOW, queryArgument);
-
-            assertThat(queryResult.asString()).isEqualTo(expectedResult);
-        }
-    }
-
-    @Nested
-    @DisplayName("should throw exception")
-    class ThrowException {
-
-        @Test
-        @DisplayName("when execute UNKNOWN command")
-        void wrong_command() {
-            final SettingContext settingContext = SettingContextDummys.simpleOne();
-            final QueryProcessor queryProcessor = QueryProcessor.of(settingContext);
-
-            assertThrows(IllegalQueryCommandException.class, () -> {
-                queryProcessor.execute(QueryCommand.UNKNOWN);
-            });
-        }
-
-//        @Test
-//        @DisplayName("when execute valid command with wrong query arguments")
-//        void valid_command_with_wrong_query_arguments() {
-//            final SettingContext settingContext = SettingContextDummys.simpleOne();
-//            final QueryProcessor queryProcessor = QueryProcessor.of(settingContext);
-//
-//            assertThrows(IllegalArgumentException.class, () -> {
-//                queryProcessor.execute(QueryCommand.SHOW, null);
-//            });
-//        }
+        assertThat(output.toString()).isEqualTo(expected);
     }
 }

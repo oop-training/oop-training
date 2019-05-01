@@ -20,8 +20,8 @@ class MainTest {
                 "5\n" +
                 "pobi\n" +
                 "jk\n" +
-                "all\n" +
-                "!bye";
+                "@all\n" +
+                "@bye";
         final OutputStream out = simulateStandardInputOutput(input);
 
         //when
@@ -72,9 +72,9 @@ class MainTest {
                 "3\n" +
                 "b\n" +
                 "e\n" +
-                "all\n" +
+                "@ALL\n" +
                 "a\n" +
-                "!bye";
+                "@bye";
         final OutputStream out = simulateStandardInputOutput(input);
 
         //when
