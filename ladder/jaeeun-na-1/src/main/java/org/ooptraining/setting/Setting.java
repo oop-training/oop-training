@@ -16,7 +16,7 @@ public enum Setting implements Parser {
     private final Parser parser;
     private final String inputMessages;
 
-    public void parse(final String line, final SettingContext.Builder builder) {
+    public void parse(final String line, final GameContext.Builder builder) {
         parser.parse(line, builder);
     }
 }

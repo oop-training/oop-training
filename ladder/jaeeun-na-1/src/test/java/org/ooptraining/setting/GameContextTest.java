@@ -8,10 +8,10 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class SettingContextTest {
+class GameContextTest {
     @Test
     void cloneTest1() {
-        final SettingContext context = SettingContext.builder()
+        final GameContext context = GameContext.builder()
                 .participants(Arrays.asList(
                         Participant.of("name1", "A"),
                         Participant.of("honghong", "B"),
@@ -20,9 +20,9 @@ class SettingContextTest {
                         Participant.of("hello", "E"),
                         Participant.of("world", "F")
                 )).build();
-        final SettingContext swappedContext = context.toSwap(0, 1);
+        final GameContext swappedContext = context.toSwap(0, 1);
 
-        final SettingContext expected = SettingContext.builder()
+        final GameContext expected = GameContext.builder()
                 .participants(Arrays.asList(
                         Participant.of("honghong", "B"),
                         Participant.of("name1", "A"),
@@ -37,7 +37,7 @@ class SettingContextTest {
 
     @Test
     void cloneTest2() {
-        final SettingContext context = SettingContext.builder()
+        final GameContext context = GameContext.builder()
                 .participants(Arrays.asList(
                         Participant.of("name1", "A"),
                         Participant.of("honghong", "B"),
@@ -46,9 +46,9 @@ class SettingContextTest {
                         Participant.of("hello", "E"),
                         Participant.of("world", "F")
                 )).build();
-        final SettingContext swappedContext = context.toSwap(1, 5);
+        final GameContext swappedContext = context.toSwap(1, 5);
 
-        final SettingContext expected = SettingContext.builder()
+        final GameContext expected = GameContext.builder()
                 .participants(Arrays.asList(
                         Participant.of("name1", "A"),
                         Participant.of("world", "F"),
@@ -65,7 +65,7 @@ class SettingContextTest {
     @Test
     void exception_when_index_is_exceed_range() {
         assertThrows(IllegalArgumentException.class, () -> {
-            final SettingContext context = SettingContext.builder()
+            final GameContext context = GameContext.builder()
                     .participants(Arrays.asList(
                             Participant.of("name1", "0"),
                             Participant.of("honghong", "1"),
@@ -74,11 +74,11 @@ class SettingContextTest {
                             Participant.of("hello", "4"),
                             Participant.of("world", "5")
                     )).build();
-            final SettingContext swappedContext = context.toSwap(0, 6);
+            final GameContext swappedContext = context.toSwap(0, 6);
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            final SettingContext context = SettingContext.builder()
+            final GameContext context = GameContext.builder()
                     .participants(Arrays.asList(
                             Participant.of("name1", "0"),
                             Participant.of("honghong", "1"),
@@ -87,7 +87,7 @@ class SettingContextTest {
                             Participant.of("hello", "4"),
                             Participant.of("world", "5")
                     )).build();
-            final SettingContext swappedContext = context.toSwap(-1, 6);
+            final GameContext swappedContext = context.toSwap(-1, 6);
         });
     }
 }

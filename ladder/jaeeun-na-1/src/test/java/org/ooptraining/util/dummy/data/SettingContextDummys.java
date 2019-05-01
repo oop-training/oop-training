@@ -2,14 +2,14 @@ package org.ooptraining.util.dummy.data;
 
 import org.junit.jupiter.params.provider.Arguments;
 import org.ooptraining.Participant;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class SettingContextDummys {
-    public static SettingContext simpleOne() {
-        return SettingContext.builder()
+    public static GameContext simpleOne() {
+        return GameContext.builder()
                 .participants(Arrays.asList(
                         Participant.of("abcd", "O"),
                         Participant.of("000", "X"),
@@ -20,9 +20,9 @@ public class SettingContextDummys {
                 ).maxHeight(8).build();
     }
 
-    public static Stream<SettingContext> data1() {
+    public static Stream<GameContext> data1() {
         return Stream.of(
-                SettingContext.builder()
+                GameContext.builder()
                         .participants(Arrays.asList(
                                 Participant.of("abcd", "O"),
                                 Participant.of("000", "X"),
@@ -32,7 +32,7 @@ public class SettingContextDummys {
                                 )
                         ).maxHeight(8).build(),
 
-                SettingContext.builder()
+                GameContext.builder()
                         .participants(Arrays.asList(
                                 Participant.of("hello", "world"),
                                 Participant.of("im", "groot"),
@@ -40,7 +40,7 @@ public class SettingContextDummys {
                                 )
                         ).maxHeight(4).build(),
 
-                SettingContext.builder()
+                GameContext.builder()
                         .participants(Arrays.asList(
                                 Participant.of("pobi", "X"),
                                 Participant.of("Jaeeun", "Na"),
@@ -49,7 +49,7 @@ public class SettingContextDummys {
                                 )
                         ).maxHeight(10).build(),
 
-                SettingContext.builder()
+                GameContext.builder()
                         .participants(Arrays.asList(
                                 Participant.of("123", "456")
                                 )
@@ -60,7 +60,7 @@ public class SettingContextDummys {
     public static Stream<Arguments> participantList_queryName_expectedResult() {
         return Stream.of(
                 Arguments.of(
-                        SettingContext.builder()
+                        GameContext.builder()
                                 .participants(Arrays.asList(
                                         Participant.of("abcd", "O"),        // target
                                         Participant.of("000", "X"),
@@ -74,7 +74,7 @@ public class SettingContextDummys {
                 ),
 
                 Arguments.of(
-                        SettingContext.builder()
+                        GameContext.builder()
                                 .participants(Arrays.asList(
                                         Participant.of("hello", "world"),
                                         Participant.of("im", "groot"),      // target
@@ -87,7 +87,7 @@ public class SettingContextDummys {
                 ),
                 Arguments.of(
 
-                        SettingContext.builder()
+                        GameContext.builder()
                                 .participants(Arrays.asList(
                                         Participant.of("pobi", "X"),
                                         Participant.of("Jaeeun", "Na"),
@@ -99,7 +99,7 @@ public class SettingContextDummys {
                         "what"
                 ),
                 Arguments.of(
-                        SettingContext.builder()
+                        GameContext.builder()
                                 .participants(Arrays.asList(
                                         Participant.of("123", "456")        // target
                                         )

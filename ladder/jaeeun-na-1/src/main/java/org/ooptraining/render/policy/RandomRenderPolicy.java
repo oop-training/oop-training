@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.ooptraining.Participant;
 import org.ooptraining.render.RenderContext;
 import org.ooptraining.render.RenderPolicy;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 
 import java.util.List;
 
@@ -14,21 +14,21 @@ import static org.ooptraining.util.StringUtils.*;
 public class RandomRenderPolicy implements RenderPolicy {
     private final RandomBoolean random;
 
-    private SettingContext lastSettingContext;
+    private GameContext lastGameContext;
 
     @Override
-    public String render(final SettingContext settingContext, final RenderContext renderContext) {
-        return render(new StringBuilder(), settingContext, renderContext);
+    public String render(final GameContext gameContext, final RenderContext renderContext) {
+        return render(new StringBuilder(), gameContext, renderContext);
     }
 
-    private String render(final StringBuilder builder, final SettingContext settingContext, final RenderContext renderContext) {
-        lastSettingContext = settingContext;
+    private String render(final StringBuilder builder, final GameContext gameContext, final RenderContext renderContext) {
+        lastGameContext = gameContext;
 
-        builder.append(renderParticipants(settingContext, renderContext));
+        builder.append(renderParticipants(gameContext, renderContext));
         builder.append(blankLine());
-        builder.append(renderLadders(settingContext, renderContext));
+        builder.append(renderLadders(gameContext, renderContext));
         builder.append(blankLine());
-        builder.append(renderResult(lastSettingContext, renderContext));
+        builder.append(renderResult(lastGameContext, renderContext));
 
         return builder.toString().trim();
     }
@@ -37,8 +37,8 @@ public class RandomRenderPolicy implements RenderPolicy {
         return "\n";
     }
 
-    private String renderParticipants(final SettingContext settingContext, final RenderContext renderContext) {
-        final List<Participant> participants = settingContext.getParticipants();
+    private String renderParticipants(final GameContext gameContext, final RenderContext renderContext) {
+        final List<Participant> participants = gameContext.getParticipants();
         final StringBuilder builder = new StringBuilder();
 
         participants.forEach(participant -> {
@@ -53,19 +53,19 @@ public class RandomRenderPolicy implements RenderPolicy {
         return builder.toString().trim();
     }
 
-    private String renderLadders(final SettingContext settingContext, final RenderContext renderContext) {
+    private String renderLadders(final GameContext gameContext, final RenderContext renderContext) {
         final StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < settingContext.getMaxHeight(); i++) {
-            builder.append(renderLadderRow(settingContext, renderContext));
+        for (int i = 0; i < gameContext.getMaxHeight(); i++) {
+            builder.append(renderLadderRow(gameContext, renderContext));
             builder.append("\n");
         }
         return builder.toString().trim();
     }
 
-    private String renderLadderRow(final SettingContext settingContext, final RenderContext renderContext) {
+    private String renderLadderRow(final GameContext gameContext, final RenderContext renderContext) {
         final StringBuilder builder = new StringBuilder();
-        final int numberOfParticipants = settingContext.getParticipants().size();
+        final int numberOfParticipants = gameContext.getParticipants().size();
 
         for (int i = 0; i < numberOfParticipants - 1; i++) {
             builder.append(renderLadderCol(i, renderContext));
@@ -80,14 +80,14 @@ public class RandomRenderPolicy implements RenderPolicy {
 
     private String paddingOrLine(final int index, final RenderContext renderContext) {
         if (random.nextBoolean()) {
-            lastSettingContext = lastSettingContext.toSwap(index, index + 1);
+            lastGameContext = lastGameContext.toSwap(index, index + 1);
             return line(renderContext.getIntervalWidth());
         }
         return padding(renderContext.getIntervalWidth());
     }
 
-    private String renderResult(final SettingContext settingContext, final RenderContext renderContext) {
-        final List<Participant> participants = settingContext.getParticipants();
+    private String renderResult(final GameContext gameContext, final RenderContext renderContext) {
+        final List<Participant> participants = gameContext.getParticipants();
         final StringBuilder builder = new StringBuilder();
 
         participants.forEach(participant -> {

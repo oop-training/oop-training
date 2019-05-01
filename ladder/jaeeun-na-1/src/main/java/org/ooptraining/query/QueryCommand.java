@@ -4,7 +4,7 @@ import org.ooptraining.exception.IllegalQueryCommandException;
 import org.ooptraining.exception.QueryProcessorExitException;
 import org.ooptraining.query.argument.DefaultQueryCommandArgument;
 import org.ooptraining.query.argument.ShowQueryCommandArgument;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -15,28 +15,28 @@ import static org.ooptraining.util.StringUtils.makeFullResultWithNameAndResult;
 public enum QueryCommand {
     SHOW_ALL {
         @Override
-        public QueryResult execute(final SettingContext settingContext) {
-            final String result = makeFullResultWithNameAndResult(settingContext);
+        public QueryResult execute(final GameContext gameContext) {
+            final String result = makeFullResultWithNameAndResult(gameContext);
 
             return QueryResult.of(result);
         }
 
         @Override
-        public QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument) {
+        public QueryResult execute(final GameContext gameContext, final QueryCommandArgument queryCommandArgument) {
             // ignore arguments
-            return execute(settingContext);
+            return execute(gameContext);
         }
     },
 
     SHOW {
         @Override
-        public QueryResult execute(final SettingContext settingContext) {
+        public QueryResult execute(final GameContext gameContext) {
             throw new IllegalArgumentException("cannot execute SHOW command without QueryCommandArgument");
         }
 
         @Override
-        public QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument) {
-            final Map<String, String> participantMap = settingContext.toParticipantMap();
+        public QueryResult execute(final GameContext gameContext, final QueryCommandArgument queryCommandArgument) {
+            final Map<String, String> participantMap = gameContext.toParticipantMap();
             final String result = participantMap.get(queryCommandArgument.first());
 
             return QueryResult.of(result);
@@ -50,24 +50,24 @@ public enum QueryCommand {
 
     EXIT {
         @Override
-        public QueryResult execute(final SettingContext settingContext) {
+        public QueryResult execute(final GameContext gameContext) {
             throw new QueryProcessorExitException("bye!");
         }
 
         @Override
-        public QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument) {
+        public QueryResult execute(final GameContext gameContext, final QueryCommandArgument queryCommandArgument) {
             throw new QueryProcessorExitException("bye!");
         }
     },
 
     UNKNOWN {
         @Override
-        public QueryResult execute(final SettingContext settingContext) {
+        public QueryResult execute(final GameContext gameContext) {
             throw new IllegalQueryCommandException(UNKNOWN);
         }
 
         @Override
-        public QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument) {
+        public QueryResult execute(final GameContext gameContext, final QueryCommandArgument queryCommandArgument) {
             throw new IllegalQueryCommandException(UNKNOWN);
         }
     };
@@ -82,9 +82,9 @@ public enum QueryCommand {
         return queryCommandMap.getOrDefault(value.toUpperCase(), UNKNOWN);
     }
 
-    public abstract QueryResult execute(final SettingContext settingContext);
+    public abstract QueryResult execute(final GameContext gameContext);
 
-    public abstract QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument);
+    public abstract QueryResult execute(final GameContext gameContext, final QueryCommandArgument queryCommandArgument);
 
     public QueryCommandArgument parseQueryArgument(final String input) {
         return new DefaultQueryCommandArgument();

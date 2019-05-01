@@ -1,7 +1,7 @@
 package org.ooptraining.util;
 
 import org.ooptraining.Participant;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 
 import static java.text.MessageFormat.format;
 
@@ -25,10 +25,10 @@ public class StringUtils {
         return name.substring(0, maxNameLength - 2) + "..";
     }
 
-    public static String makeFullResultWithNameAndResult(final SettingContext settingContext) {
+    public static String makeFullResultWithNameAndResult(final GameContext gameContext) {
         final StringBuilder sb = new StringBuilder();
 
-        settingContext.getParticipants().forEach(p -> {
+        gameContext.getParticipants().forEach(p -> {
             sb.append(makeResultWithNameAndResult(p));
             sb.append("\n");
         });

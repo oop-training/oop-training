@@ -3,7 +3,7 @@ package org.ooptraining.query;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 import org.ooptraining.util.IOUtils;
 
 import java.io.OutputStream;
@@ -27,7 +27,7 @@ class QueryProcessorTest {
         final OutputStream output = IOUtils.simulateStandardInputOutput(input);
 
         final Scanner sc = new Scanner(System.in);
-        final SettingContext settingContext = SettingContext.builder()
+        final GameContext gameContext = GameContext.builder()
                 .participants(Arrays.asList(
                         Participant.of("name1", "result1"),
                         Participant.of("name2", "result2"),
@@ -41,7 +41,7 @@ class QueryProcessorTest {
 
         final QueryProcessor queryProcessor = QueryProcessor.of(sc);
 
-        queryProcessor.run(settingContext);
+        queryProcessor.run(gameContext);
 
         final String expected =
                 "결과를 보고 싶은 사람은?\n" +

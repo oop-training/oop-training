@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;
 import org.ooptraining.render.Renderer;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +23,7 @@ class RandomRenderPolicyTest {
         @Test
         @DisplayName("all horizontally line")
         void random_test1() {
-            final SettingContext settingContext = SettingContext.builder()
+            final GameContext gameContext = GameContext.builder()
                     .participants(Arrays.asList(
                             Participant.of("abc", "X"),
                             Participant.of("123", "O"),
@@ -38,7 +38,7 @@ class RandomRenderPolicyTest {
             final Renderer renderer = Renderer.of(randomRenderPolicy);
 
 
-            final String ladder = renderer.render(settingContext);
+            final String ladder = renderer.render(gameContext);
 
 
             final String expected =
@@ -55,7 +55,7 @@ class RandomRenderPolicyTest {
         @Test
         @DisplayName("with no line")
         void random_test2() {
-            final SettingContext settingContext = SettingContext.builder()
+            final GameContext gameContext = GameContext.builder()
                     .participants(Arrays.asList(
                             Participant.of("abc", "X"),
                             Participant.of("123", "O"),
@@ -70,7 +70,7 @@ class RandomRenderPolicyTest {
             final Renderer renderer = Renderer.of(randomRenderPolicy);
 
 
-            final String ladder = renderer.render(settingContext);
+            final String ladder = renderer.render(gameContext);
 
 
             final String expected =
@@ -87,7 +87,7 @@ class RandomRenderPolicyTest {
         @Test
         @DisplayName("line for one by one column")
         void random_test3() {
-            final SettingContext settingContext = SettingContext.builder()
+            final GameContext gameContext = GameContext.builder()
                     .participants(Arrays.asList(
                             Participant.of("abc", "A"),
                             Participant.of("123", "B"),
@@ -102,7 +102,7 @@ class RandomRenderPolicyTest {
             final Renderer renderer = Renderer.of(randomRenderPolicy);
 
 
-            final String ladder = renderer.render(settingContext);
+            final String ladder = renderer.render(gameContext);
 
 
             final String expected =
@@ -125,7 +125,7 @@ class RandomRenderPolicyTest {
         @Test
         @DisplayName("correct name-result pair")
         void random_test4() {
-            final SettingContext settingContext = SettingContext.builder()
+            final GameContext gameContext = GameContext.builder()
                     .participants(Arrays.asList(
                             Participant.of("abc", "abc"),
                             Participant.of("123", "123"),
@@ -147,7 +147,7 @@ class RandomRenderPolicyTest {
             final Renderer renderer = Renderer.of(randomRenderPolicy);
 
 
-            final String ladder = renderer.render(settingContext);
+            final String ladder = renderer.render(gameContext);
 
 
             final String expected =
@@ -164,7 +164,7 @@ class RandomRenderPolicyTest {
         @Test
         @DisplayName("correct name-result pair in more complicate (2 lines)")
         void random_test5() {
-            final SettingContext settingContext = SettingContext.builder()
+            final GameContext gameContext = GameContext.builder()
                     .participants(Arrays.asList(
                             Participant.of("abc", "abc"),
                             Participant.of("123", "123"),
@@ -186,7 +186,7 @@ class RandomRenderPolicyTest {
             final Renderer renderer = Renderer.of(randomRenderPolicy);
 
 
-            final String ladder = renderer.render(settingContext);
+            final String ladder = renderer.render(gameContext);
 
 
             final String expected =
@@ -203,7 +203,7 @@ class RandomRenderPolicyTest {
         @Test
         @DisplayName("correct name-result pair in more complicate (3 lines)")
         void random_test6() {
-            final SettingContext settingContext = SettingContext.builder()
+            final GameContext gameContext = GameContext.builder()
                     .participants(Arrays.asList(
                             Participant.of("abc", "abc"),
                             Participant.of("123", "123"),
@@ -225,7 +225,7 @@ class RandomRenderPolicyTest {
             final Renderer renderer = Renderer.of(randomRenderPolicy);
 
 
-            final String ladder = renderer.render(settingContext);
+            final String ladder = renderer.render(gameContext);
 
 
             final String expected =

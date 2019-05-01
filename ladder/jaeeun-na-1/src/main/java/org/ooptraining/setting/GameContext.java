@@ -11,21 +11,21 @@ import java.util.stream.Collectors;
 
 @Getter
 @ToString
-public class SettingContext {
+public class GameContext {
     private List<Participant> participants;
     private int maxHeight;
 
-    private SettingContext() {
+    private GameContext() {
         participants = new ArrayList<>();
     }
 
-    public static SettingContext.Builder builder() {
+    public static GameContext.Builder builder() {
         return new Builder();
     }
 
-    public SettingContext toSwap(int leftIndex, int rightIndex) {
+    public GameContext toSwap(int leftIndex, int rightIndex) {
         if (leftIndex < 0 || rightIndex >= participants.size()) {
-            throw new IllegalArgumentException("invalid index for SettingContext");
+            throw new IllegalArgumentException("invalid index for GameContext");
         }
 
         final List<Participant> newParticipants = participants.stream()
@@ -37,7 +37,7 @@ public class SettingContext {
         newParticipants.set(leftIndex, right);
         newParticipants.set(rightIndex, left);
 
-        return SettingContext.builder().participants(newParticipants).build();
+        return GameContext.builder().participants(newParticipants).build();
     }
 
     public Map<String, String> toParticipantMap() {
@@ -45,16 +45,16 @@ public class SettingContext {
     }
 
     public static class Builder {
-        private SettingContext instance;
+        private GameContext instance;
         private List<String> names = new ArrayList<>();
         private List<String> results = new ArrayList<>();
 
         Builder() {
-            instance = new SettingContext();
+            instance = new GameContext();
             instance.maxHeight = 5;
         }
 
-        public SettingContext build() {
+        public GameContext build() {
             if (names.size() != results.size()) {
                 throw new IllegalStateException();
             }

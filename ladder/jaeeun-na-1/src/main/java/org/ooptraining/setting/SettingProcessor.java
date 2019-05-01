@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class SettingProcessor {
     private final Scanner sc;
 
-    public SettingContext run(final List<Setting> settings) {
-        final SettingContext.Builder builder = SettingContext.builder();
+    public GameContext run(final List<Setting> settings) {
+        final GameContext.Builder builder = GameContext.builder();
 
         settings.forEach(setting -> {
             System.out.println(setting.getInputMessages());

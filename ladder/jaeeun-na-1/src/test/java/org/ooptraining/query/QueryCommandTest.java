@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.ooptraining.exception.IllegalQueryCommandException;
 import org.ooptraining.query.argument.ShowQueryCommandArgument;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 import org.ooptraining.util.dummy.data.SettingContextDummys;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,20 +23,20 @@ class QueryCommandTest {
         @DisplayName("SHOW_ALL command")
         @ParameterizedTest(name = "[{index}]-{arguments}")
         @MethodSource("org.ooptraining.util.dummy.data.SettingContextDummys#data1")
-        void query_test_show_all_command(final SettingContext settingContext) {
-            final QueryResult queryResult = QueryCommand.SHOW_ALL.execute(settingContext);
+        void query_test_show_all_command(final GameContext gameContext) {
+            final QueryResult queryResult = QueryCommand.SHOW_ALL.execute(gameContext);
 
-            final String expected = makeFullResultWithNameAndResult(settingContext);
+            final String expected = makeFullResultWithNameAndResult(gameContext);
             assertThat(queryResult.asString()).isEqualTo(expected);
         }
 
         @DisplayName("SHOW command (specific name-result)")
         @ParameterizedTest(name = "[{index}]-{arguments}")
         @MethodSource("org.ooptraining.util.dummy.data.SettingContextDummys#participantList_queryName_expectedResult")
-        void query_test_show_command(final SettingContext settingContext, final String queryName, final String expectedResult) {
+        void query_test_show_command(final GameContext gameContext, final String queryName, final String expectedResult) {
             final QueryCommandArgument queryCommandArgument = ShowQueryCommandArgument.of(queryName);
 
-            final QueryResult queryResult = QueryCommand.SHOW.execute(settingContext, queryCommandArgument);
+            final QueryResult queryResult = QueryCommand.SHOW.execute(gameContext, queryCommandArgument);
 
             assertThat(queryResult.asString()).isEqualTo(expectedResult);
         }
@@ -49,10 +49,10 @@ class QueryCommandTest {
         @Test
         @DisplayName("when execute UNKNOWN command")
         void wrong_command() {
-            final SettingContext settingContext = SettingContextDummys.simpleOne();
+            final GameContext gameContext = SettingContextDummys.simpleOne();
 
             assertThrows(IllegalQueryCommandException.class, () -> {
-                QueryCommand.UNKNOWN.execute(settingContext);
+                QueryCommand.UNKNOWN.execute(gameContext);
             });
         }
     }

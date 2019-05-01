@@ -2,8 +2,8 @@ package org.ooptraining;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.ooptraining.setting.GameContext;
 import org.ooptraining.setting.Setting;
-import org.ooptraining.setting.SettingContext;
 import org.ooptraining.setting.SettingProcessor;
 
 import java.io.OutputStream;
@@ -33,14 +33,14 @@ class SettingProcessorTest {
         //when
         final OutputStream out = simulateStandardInputOutput(input);
         final SettingProcessor processor = SettingProcessor.of(new Scanner(System.in));
-        final SettingContext context = processor.run(settings);
+        final GameContext context = processor.run(settings);
 
         //then
         final String expectedOut =
                 "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)\n" +
                         "실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)\n" +
                         "최대 사다리 높이는 몇 개인가요?\n";
-        final SettingContext expectedContext = SettingContext.builder()
+        final GameContext expectedContext = GameContext.builder()
                 .participants(Arrays.asList(
                         Participant.of("a", "꽝"),
                         Participant.of("b", "성공"),

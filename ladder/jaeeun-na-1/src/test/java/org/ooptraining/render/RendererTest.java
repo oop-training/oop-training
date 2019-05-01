@@ -1,10 +1,9 @@
 package org.ooptraining.render;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.Participant;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +21,7 @@ class RendererTest {
                 Participant.of("c", "X"),
                 Participant.of("d", "X")
         );
-        final SettingContext settingContext = SettingContext.builder()
+        final GameContext gameContext = GameContext.builder()
                 .participants(participants)
                 .maxHeight(5).build();
         final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
@@ -30,7 +29,7 @@ class RendererTest {
                 .intervalWidth(8)
                 .maxNameLength(7).build();
 
-        final String ladderResult = renderer.render(settingContext, renderContext);
+        final String ladderResult = renderer.render(gameContext, renderContext);
 
         final String expectedLadder =
                 "a        bhello   c        d\n" +
@@ -52,7 +51,7 @@ class RendererTest {
                 Participant.of("c", "X"),
                 Participant.of("d", "X")
         );
-        final SettingContext settingContext = SettingContext.builder()
+        final GameContext gameContext = GameContext.builder()
                 .participants(participants)
                 .maxHeight(5).build();
         final RenderContext renderContext = RenderContext.builder()
@@ -61,7 +60,7 @@ class RendererTest {
         final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
 
 
-        final String ladderResult = renderer.render(settingContext, renderContext);
+        final String ladderResult = renderer.render(gameContext, renderContext);
 
 
         final String expectedLadder =
@@ -86,7 +85,7 @@ class RendererTest {
                 Participant.of("e", "X"),
                 Participant.of("f", "X")
         );
-        final SettingContext settingContext = SettingContext.builder()
+        final GameContext gameContext = GameContext.builder()
                 .participants(participants)
                 .maxHeight(7).build();
         final RenderContext renderContext = RenderContext.builder()
@@ -95,7 +94,7 @@ class RendererTest {
         final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT)
                 .with(renderContext);
 
-        final String ladderResult = renderer.render(settingContext);
+        final String ladderResult = renderer.render(gameContext);
 
         final String expectedLadder =
                 "a    so.. c    d    e    f\n" +

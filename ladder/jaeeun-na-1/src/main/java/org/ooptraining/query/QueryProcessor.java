@@ -2,7 +2,7 @@ package org.ooptraining.query;
 
 import lombok.RequiredArgsConstructor;
 import org.ooptraining.exception.QueryProcessorExitException;
-import org.ooptraining.setting.SettingContext;
+import org.ooptraining.setting.GameContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class QueryProcessor {
         queryCommandMap.put("@BYE", EXIT);
     }
 
-    public void run(final SettingContext settingContext) {
+    public void run(final GameContext gameContext) {
         try {
             while (true) {
                 System.out.println("결과를 보고 싶은 사람은?");
@@ -30,7 +30,7 @@ public class QueryProcessor {
                 final QueryCommand queryCommand = parseQueryCommand(input);
                 final QueryCommandArgument queryCommandArgument = queryCommand.parseQueryArgument(input);
 
-                final QueryResult queryResult = queryCommand.execute(settingContext, queryCommandArgument);
+                final QueryResult queryResult = queryCommand.execute(gameContext, queryCommandArgument);
 
                 System.out.println("실행 결과");
                 System.out.println(queryResult.asString());
