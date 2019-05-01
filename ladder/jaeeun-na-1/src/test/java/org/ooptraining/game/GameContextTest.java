@@ -1,7 +1,6 @@
 package org.ooptraining.game;
 
 import org.junit.jupiter.api.Test;
-import org.ooptraining.Participant;
 
 import java.util.Arrays;
 

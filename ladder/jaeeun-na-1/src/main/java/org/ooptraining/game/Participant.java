@@ -1,4 +1,4 @@
-package org.ooptraining;
+package org.ooptraining.game;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

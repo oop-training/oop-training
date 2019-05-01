@@ -1,7 +1,7 @@
 package org.ooptraining.render.policy;
 
 import lombok.RequiredArgsConstructor;
-import org.ooptraining.Participant;
+import org.ooptraining.game.Participant;
 import org.ooptraining.render.RenderContext;
 import org.ooptraining.render.RenderPolicy;
 import org.ooptraining.game.GameContext;

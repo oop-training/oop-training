@@ -2,6 +2,7 @@ package org.ooptraining;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.ooptraining.game.Participant;
 import org.ooptraining.io.StandardInputOutput;
 import org.ooptraining.game.GameContext;
 import org.ooptraining.game.GameContextProcessor;

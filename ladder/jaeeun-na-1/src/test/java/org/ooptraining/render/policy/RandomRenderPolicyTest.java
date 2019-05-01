@@ -3,7 +3,7 @@ package org.ooptraining.render.policy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.ooptraining.Participant;
+import org.ooptraining.game.Participant;
 import org.ooptraining.render.Renderer;
 import org.ooptraining.game.GameContext;
 
