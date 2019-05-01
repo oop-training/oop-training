@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 @Log
 @RequiredArgsConstructor(staticName = "of")
-public class SettingProcessor {
+public class GameContextProcessor {
     private final Scanner sc;
 
     public GameContext run(final List<Setting> settings) {

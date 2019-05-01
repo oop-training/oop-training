@@ -9,7 +9,7 @@ import org.ooptraining.render.policy.DefaultRandom;
 import org.ooptraining.render.policy.RandomRenderPolicy;
 import org.ooptraining.setting.Setting;
 import org.ooptraining.setting.GameContext;
-import org.ooptraining.setting.SettingProcessor;
+import org.ooptraining.setting.GameContextProcessor;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -31,8 +31,8 @@ public class Main {
         // TODO: input, output을 injection
         //  반드시 stdin, out말고 file이나 http call 일 수도 있음.
         //  인터페이스 정의한 뒤 삽입
-        final SettingProcessor settingProcessor = SettingProcessor.of(sc);
-        final GameContext gameContext = settingProcessor.run(Arrays.asList(
+        final GameContextProcessor gameContextProcessor = GameContextProcessor.of(sc);
+        final GameContext gameContext = gameContextProcessor.run(Arrays.asList(
                 Setting.NAME,
                 Setting.RESULT,
                 Setting.MAX_HEIGHT
@@ -51,7 +51,5 @@ public class Main {
 
         final QueryProcessor queryProcessor = QueryProcessor.of(sc);
         queryProcessor.run(gameContext);
-
-        // TODO: 마무리 정리 작업 (메시징, 코드 이름, ...)
     }
 }

@@ -3,8 +3,8 @@ package org.ooptraining;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ooptraining.setting.GameContext;
+import org.ooptraining.setting.GameContextProcessor;
 import org.ooptraining.setting.Setting;
-import org.ooptraining.setting.SettingProcessor;
 
 import java.io.OutputStream;
 import java.util.Arrays;
@@ -15,8 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.ooptraining.util.IOUtils.simulateStandardInputOutput;
 
-@DisplayName("SettingProcessor")
-class SettingProcessorTest {
+@DisplayName("GameContextProcessor")
+class GameContextProcessorTest {
     @Test
     @DisplayName("should parse to parse name, result, and max-height for ladder")
     void should_generate_participants() {
@@ -32,7 +32,7 @@ class SettingProcessorTest {
 
         //when
         final OutputStream out = simulateStandardInputOutput(input);
-        final SettingProcessor processor = SettingProcessor.of(new Scanner(System.in));
+        final GameContextProcessor processor = GameContextProcessor.of(new Scanner(System.in));
         final GameContext context = processor.run(settings);
 
         //then
@@ -69,7 +69,7 @@ class SettingProcessorTest {
 
         //when
         simulateStandardInputOutput(input);
-        final SettingProcessor processor = SettingProcessor.of(new Scanner(System.in));
+        final GameContextProcessor processor = GameContextProcessor.of(new Scanner(System.in));
 
         //then
         assertThrows(IllegalStateException.class, () -> {
