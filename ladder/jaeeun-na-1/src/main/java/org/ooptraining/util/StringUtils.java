@@ -29,7 +29,7 @@ public class StringUtils {
         final StringBuilder sb = new StringBuilder();
 
         settingContext.getParticipants().forEach(p -> {
-            makeResultWithNameAndResult(p);
+            sb.append(makeResultWithNameAndResult(p));
             sb.append("\n");
         });
 
