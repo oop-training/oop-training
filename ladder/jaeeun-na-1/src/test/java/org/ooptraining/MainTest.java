@@ -2,6 +2,7 @@ package org.ooptraining;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.ooptraining.render.policy.OneLineRenderPolicy;
 
 import java.io.OutputStream;
 
@@ -24,7 +25,7 @@ class MainTest {
         final OutputStream out = simulateStandardInputOutput(input);
 
         //when
-        Main.main(null);
+        Main.run(new OneLineRenderPolicy());
 
         //then
         final String expected = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)\n" +
@@ -77,7 +78,7 @@ class MainTest {
         final OutputStream out = simulateStandardInputOutput(input);
 
         //when
-        Main.main(null);
+        Main.run(new OneLineRenderPolicy());
 
         //then
         final String expected = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)\n" +

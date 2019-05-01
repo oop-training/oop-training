@@ -1,9 +1,15 @@
 package org.ooptraining;
 
 import lombok.extern.java.Log;
+import org.ooptraining.query.QueryCommand;
+import org.ooptraining.query.QueryProcessor;
+import org.ooptraining.query.QueryResult;
+import org.ooptraining.query.argument.ShowQueryCommandArgument;
 import org.ooptraining.render.RenderContext;
 import org.ooptraining.render.RenderPolicy;
 import org.ooptraining.render.Renderer;
+import org.ooptraining.render.policy.DefaultRandom;
+import org.ooptraining.render.policy.RandomRenderPolicy;
 import org.ooptraining.setting.Setting;
 import org.ooptraining.setting.SettingContext;
 import org.ooptraining.setting.SettingProcessor;
@@ -15,6 +21,15 @@ import java.util.Scanner;
 @Log
 public class Main {
     public static void main(String[] args) {
+        run();
+    }
+
+    public static void run() {
+        final RenderPolicy policy = RandomRenderPolicy.of(new DefaultRandom());
+        run(policy);
+    }
+
+    public static void run(final RenderPolicy renderPolicy) {
         final Scanner sc = new Scanner(System.in);
 
         // TODO: input, output을 injection
@@ -33,34 +48,29 @@ public class Main {
                 .intervalWidth(7)
                 .maxNameLength(7)
                 .build();
-        final Renderer renderer = Renderer.of(RenderPolicy.DEFAULT);
+        final Renderer renderer = Renderer.of(renderPolicy);
         final String renderResult = renderer.render(settingContext, renderContext);
         System.out.println(renderResult);
         System.out.println();
 
-        final List<String> queryMessages = Arrays.asList(
-                "결과를 보고 싶은 사람은?"
-        );
-        final List<String> queryResponse = Arrays.asList(
-                "꽝\n",
-                "pobi : 꽝\n" +
-                        "honux : 3000\n" +
-                        "crong : 꽝\n" +
-                        "jk : 5000\n"
-        );
-        // TODO: 마지막 사용자 query받는 부분 설계 및 구현
-        int i = 0;
+        final QueryProcessor queryProcessor = QueryProcessor.of(settingContext);
         while (true) {
-            for (String m : queryMessages) {
-                System.out.println(m);
-                final String input = sc.nextLine();
-                if (input.equalsIgnoreCase("!bye")) {
-                    System.out.println("bye!");
-                    return;
-                }
-                System.out.println("실행 결과");
-                System.out.println(queryResponse.get(i++));
+            System.out.println("결과를 보고 싶은 사람은?");
+            final String input = sc.nextLine();
+            QueryResult result;
+
+            if (input.equalsIgnoreCase("all")) {
+                result = queryProcessor.execute(QueryCommand.SHOW_ALL);
+            } else if (input.equalsIgnoreCase("!bye")) {
+                System.out.println("bye!");
+                return;
+            } else {
+                result = queryProcessor.execute(QueryCommand.SHOW, ShowQueryCommandArgument.of(input));
             }
+
+            System.out.println("실행 결과");
+            System.out.println(result.asString());
+            System.out.println();
         }
 
         // TODO: 마무리 정리 작업 (메시징, 코드 이름, ...)
