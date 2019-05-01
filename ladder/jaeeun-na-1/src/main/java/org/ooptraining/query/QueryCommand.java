@@ -4,13 +4,14 @@ import org.ooptraining.Participant;
 import org.ooptraining.exception.IllegalQueryCommandException;
 import org.ooptraining.setting.SettingContext;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
 import static org.ooptraining.util.StringUtils.makeFullResultWithNameAndResult;
 
 public enum QueryCommand {
-    SHOW_ALL("SHOW_ALL") {
+    SHOW_ALL {
         @Override
         public QueryResult execute(final SettingContext settingContext) {
             final String result = makeFullResultWithNameAndResult(settingContext);
@@ -25,7 +26,7 @@ public enum QueryCommand {
         }
     },
 
-    SHOW("SHOW") {
+    SHOW {
         @Override
         public QueryResult execute(final SettingContext settingContext) {
             throw new IllegalArgumentException("cannot execute SHOW command without QueryArgument");
@@ -40,7 +41,7 @@ public enum QueryCommand {
         }
     },
 
-    UNKNOWN("UNKNOWN") {
+    UNKNOWN {
         @Override
         public QueryResult execute(final SettingContext settingContext) {
             throw new IllegalQueryCommandException(UNKNOWN);
@@ -52,10 +53,14 @@ public enum QueryCommand {
         }
     };
 
-    private final String value;
+    private static Map<String, QueryCommand> queryCommandMap;
 
-    QueryCommand(final String value) {
-        this.value = value;
+    static {
+        queryCommandMap = Arrays.stream(values()).collect(toMap(Enum::name, o -> o));
+    }
+
+    public static QueryCommand of(String value) {
+        return queryCommandMap.getOrDefault(value.toUpperCase(), UNKNOWN);
     }
 
     public abstract QueryResult execute(final SettingContext settingContext);
@@ -64,6 +69,6 @@ public enum QueryCommand {
 
     @Override
     public String toString() {
-        return value;
+        return name();
     }
 }
