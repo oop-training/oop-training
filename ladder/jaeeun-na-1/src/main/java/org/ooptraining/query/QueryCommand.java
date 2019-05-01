@@ -39,7 +39,7 @@ public enum QueryCommand {
             final Map<String, String> participantMap = gameContext.toParticipantMap();
             final String result = participantMap.get(queryCommandArgument.first());
 
-            return QueryResult.of(result);
+            return QueryResult.of(result, "Invalid User Name.");
         }
 
         @Override
