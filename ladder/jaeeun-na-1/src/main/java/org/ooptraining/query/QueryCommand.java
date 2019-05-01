@@ -1,7 +1,9 @@
 package org.ooptraining.query;
 
-import org.ooptraining.Participant;
 import org.ooptraining.exception.IllegalQueryCommandException;
+import org.ooptraining.exception.QueryProcessorExitException;
+import org.ooptraining.query.argument.DefaultQueryCommandArgument;
+import org.ooptraining.query.argument.ShowQueryCommandArgument;
 import org.ooptraining.setting.SettingContext;
 
 import java.util.Arrays;
@@ -34,10 +36,27 @@ public enum QueryCommand {
 
         @Override
         public QueryResult execute(final SettingContext settingContext, final QueryArgument queryArgument) {
-            final Map<String, String> nameAndResultMap = settingContext.getParticipants().stream()
-                    .collect(toMap(Participant::getName, Participant::getResult));
+            final Map<String, String> participantMap = settingContext.toParticipantMap();
+            final String result = participantMap.get(queryArgument.first());
 
-            return new QueryResult(nameAndResultMap.get(queryArgument.first()));
+            return new QueryResult(result);
+        }
+
+        @Override
+        public QueryArgument parseQueryArgument(final String input) {
+            return ShowQueryCommandArgument.of(input);
+        }
+    },
+
+    EXIT {
+        @Override
+        public QueryResult execute(final SettingContext settingContext) {
+            throw new QueryProcessorExitException("bye!");
+        }
+
+        @Override
+        public QueryResult execute(final SettingContext settingContext, final QueryArgument queryArgument) {
+            throw new QueryProcessorExitException("bye!");
         }
     },
 
@@ -66,6 +85,10 @@ public enum QueryCommand {
     public abstract QueryResult execute(final SettingContext settingContext);
 
     public abstract QueryResult execute(final SettingContext settingContext, final QueryArgument queryArgument);
+
+    public QueryArgument parseQueryArgument(final String input) {
+        return new DefaultQueryCommandArgument();
+    }
 
     @Override
     public String toString() {

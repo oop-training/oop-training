@@ -1,36 +1,49 @@
 package org.ooptraining.query;
 
 import lombok.RequiredArgsConstructor;
-import org.ooptraining.query.argument.ShowQueryCommandArgument;
+import org.ooptraining.exception.QueryProcessorExitException;
 import org.ooptraining.setting.SettingContext;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+
+import static org.ooptraining.query.QueryCommand.*;
 
 @RequiredArgsConstructor(staticName = "of")
 public class QueryProcessor {
     private final Scanner sc;
+    private static Map<String, QueryCommand> queryCommandMap;
+
+    static {
+        queryCommandMap = new HashMap<>();
+        queryCommandMap.put("@ALL", SHOW_ALL);
+        queryCommandMap.put("@BYE", EXIT);
+    }
 
     public void run(final SettingContext settingContext) {
-        while (true) {
-            System.out.println("결과를 보고 싶은 사람은?");
-            final String input = sc.nextLine();
+        try {
+            while (true) {
+                System.out.println("결과를 보고 싶은 사람은?");
+                final String input = sc.nextLine();
 
-            QueryResult queryResult;
-            if (input.equalsIgnoreCase("@all")) {
-                queryResult = QueryCommand.SHOW_ALL.execute(settingContext);
-            } else if (settingContext.toParticipantMap().containsKey(input)) {
-                final QueryArgument queryArgument = ShowQueryCommandArgument.of(input.trim());
-                queryResult = QueryCommand.SHOW.execute(settingContext, queryArgument);
-            } else if (input.equalsIgnoreCase("@bye")) {
-                System.out.println("bye!");
-                return;
-            } else {
-                queryResult = new QueryResult("invalid");
+                final QueryCommand queryCommand = parseQueryCommand(input);
+                final QueryArgument queryArgument = queryCommand.parseQueryArgument(input);
+
+                final QueryResult queryResult = queryCommand.execute(settingContext, queryArgument);
+
+                System.out.println("실행 결과");
+                System.out.println(queryResult.asString());
+                System.out.println();
             }
-
-            System.out.println("실행 결과");
-            System.out.println(queryResult.asString());
-            System.out.println();
+        } catch (QueryProcessorExitException exitException) {
+            System.out.println(exitException.getMessage());
         }
+    }
+
+    private QueryCommand parseQueryCommand(final String input) {
+        final String normalizedInput = input.toUpperCase();
+
+        return queryCommandMap.getOrDefault(normalizedInput, SHOW);
     }
 }
