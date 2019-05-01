@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("QueryProcessor")
 class QueryProcessorTest {
     @Test
+    @DisplayName("can handle SHOW command")
     void run_test_1() {
         final String input =
                 "name1\n" +
@@ -68,7 +69,7 @@ class QueryProcessorTest {
     }
 
     @Test
-    @DisplayName("no name")
+    @DisplayName("can throw exception when invalid use in show command")
     void run_no_name_1() {
         final String input =
                 "name1\n" +
