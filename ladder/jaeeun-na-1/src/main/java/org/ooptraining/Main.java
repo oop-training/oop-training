@@ -42,36 +42,19 @@ public class Main {
                 Setting.MAX_HEIGHT
         ));
 
-        System.out.println();
-        System.out.println("사다리 결과");
         final RenderContext renderContext = RenderContext.builder()
                 .intervalWidth(7)
                 .maxNameLength(7)
                 .build();
         final Renderer renderer = Renderer.of(renderPolicy);
         final String renderResult = renderer.render(settingContext, renderContext);
+        System.out.println();
+        System.out.println("사다리 결과");
         System.out.println(renderResult);
         System.out.println();
 
-        final QueryProcessor queryProcessor = QueryProcessor.of(settingContext);
-        while (true) {
-            System.out.println("결과를 보고 싶은 사람은?");
-            final String input = sc.nextLine();
-            QueryResult result;
-
-            if (input.equalsIgnoreCase("all")) {
-                result = queryProcessor.execute(QueryCommand.SHOW_ALL);
-            } else if (input.equalsIgnoreCase("!bye")) {
-                System.out.println("bye!");
-                return;
-            } else {
-                result = queryProcessor.execute(QueryCommand.SHOW, ShowQueryCommandArgument.of(input));
-            }
-
-            System.out.println("실행 결과");
-            System.out.println(result.asString());
-            System.out.println();
-        }
+        final QueryProcessor queryProcessor = QueryProcessor.of(sc);
+        queryProcessor.run(settingContext);
 
         // TODO: 마무리 정리 작업 (메시징, 코드 이름, ...)
     }
