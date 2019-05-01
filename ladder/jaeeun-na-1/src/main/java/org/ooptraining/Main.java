@@ -28,9 +28,6 @@ public class Main {
     public static void run(final RenderPolicy renderPolicy) {
         final Scanner sc = new Scanner(System.in);
 
-        // TODO: input, output을 injection
-        //  반드시 stdin, out말고 file이나 http call 일 수도 있음.
-        //  인터페이스 정의한 뒤 삽입
         final GameContextProcessor gameContextProcessor = GameContextProcessor.of(sc);
         final GameContext gameContext = gameContextProcessor.run(Arrays.asList(
                 Setting.NAME,
