@@ -18,11 +18,11 @@ public enum QueryCommand {
         public QueryResult execute(final SettingContext settingContext) {
             final String result = makeFullResultWithNameAndResult(settingContext);
 
-            return new QueryResult(result);
+            return QueryResult.of(result);
         }
 
         @Override
-        public QueryResult execute(final SettingContext settingContext, final QueryArgument queryArgument) {
+        public QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument) {
             // ignore arguments
             return execute(settingContext);
         }
@@ -31,19 +31,19 @@ public enum QueryCommand {
     SHOW {
         @Override
         public QueryResult execute(final SettingContext settingContext) {
-            throw new IllegalArgumentException("cannot execute SHOW command without QueryArgument");
+            throw new IllegalArgumentException("cannot execute SHOW command without QueryCommandArgument");
         }
 
         @Override
-        public QueryResult execute(final SettingContext settingContext, final QueryArgument queryArgument) {
+        public QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument) {
             final Map<String, String> participantMap = settingContext.toParticipantMap();
-            final String result = participantMap.get(queryArgument.first());
+            final String result = participantMap.get(queryCommandArgument.first());
 
-            return new QueryResult(result);
+            return QueryResult.of(result);
         }
 
         @Override
-        public QueryArgument parseQueryArgument(final String input) {
+        public QueryCommandArgument parseQueryArgument(final String input) {
             return ShowQueryCommandArgument.of(input);
         }
     },
@@ -55,7 +55,7 @@ public enum QueryCommand {
         }
 
         @Override
-        public QueryResult execute(final SettingContext settingContext, final QueryArgument queryArgument) {
+        public QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument) {
             throw new QueryProcessorExitException("bye!");
         }
     },
@@ -67,7 +67,7 @@ public enum QueryCommand {
         }
 
         @Override
-        public QueryResult execute(final SettingContext settingContext, final QueryArgument queryArgument) {
+        public QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument) {
             throw new IllegalQueryCommandException(UNKNOWN);
         }
     };
@@ -84,9 +84,9 @@ public enum QueryCommand {
 
     public abstract QueryResult execute(final SettingContext settingContext);
 
-    public abstract QueryResult execute(final SettingContext settingContext, final QueryArgument queryArgument);
+    public abstract QueryResult execute(final SettingContext settingContext, final QueryCommandArgument queryCommandArgument);
 
-    public QueryArgument parseQueryArgument(final String input) {
+    public QueryCommandArgument parseQueryArgument(final String input) {
         return new DefaultQueryCommandArgument();
     }
 

@@ -1,8 +1,8 @@
 package org.ooptraining.query.argument;
 
-import org.ooptraining.query.QueryArgument;
+import org.ooptraining.query.QueryCommandArgument;
 
-public class DefaultQueryCommandArgument implements QueryArgument {
+public class DefaultQueryCommandArgument implements QueryCommandArgument {
     @Override
     public String first() {
         return "";

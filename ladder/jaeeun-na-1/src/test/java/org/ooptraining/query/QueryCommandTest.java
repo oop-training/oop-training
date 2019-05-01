@@ -34,9 +34,9 @@ class QueryCommandTest {
         @ParameterizedTest(name = "[{index}]-{arguments}")
         @MethodSource("org.ooptraining.util.dummy.data.SettingContextDummys#participantList_queryName_expectedResult")
         void query_test_show_command(final SettingContext settingContext, final String queryName, final String expectedResult) {
-            final QueryArgument queryArgument = ShowQueryCommandArgument.of(queryName);
+            final QueryCommandArgument queryCommandArgument = ShowQueryCommandArgument.of(queryName);
 
-            final QueryResult queryResult = QueryCommand.SHOW.execute(settingContext, queryArgument);
+            final QueryResult queryResult = QueryCommand.SHOW.execute(settingContext, queryCommandArgument);
 
             assertThat(queryResult.asString()).isEqualTo(expectedResult);
         }

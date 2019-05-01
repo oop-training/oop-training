@@ -8,12 +8,20 @@ public class QueryResult implements Stringifiable {
     private final String result;
     private final String invalidMessage;
 
-    public QueryResult(final String result) {
+    public static QueryResult of(final String result) {
+        return new QueryResult(result);
+    }
+
+    public static QueryResult of(final String result, final String invalidMessage) {
+        return new QueryResult(result, invalidMessage);
+    }
+
+    private QueryResult(final String result) {
         this.result = result;
         invalidMessage = "";
     }
 
-    public QueryResult(final String result, final String invalidMessage) {
+    private QueryResult(final String result, final String invalidMessage) {
         this.result = result;
         this.invalidMessage = invalidMessage;
     }

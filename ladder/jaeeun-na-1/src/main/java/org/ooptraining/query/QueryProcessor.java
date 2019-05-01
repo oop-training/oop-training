@@ -28,9 +28,9 @@ public class QueryProcessor {
                 final String input = sc.nextLine();
 
                 final QueryCommand queryCommand = parseQueryCommand(input);
-                final QueryArgument queryArgument = queryCommand.parseQueryArgument(input);
+                final QueryCommandArgument queryCommandArgument = queryCommand.parseQueryArgument(input);
 
-                final QueryResult queryResult = queryCommand.execute(settingContext, queryArgument);
+                final QueryResult queryResult = queryCommand.execute(settingContext, queryCommandArgument);
 
                 System.out.println("실행 결과");
                 System.out.println(queryResult.asString());
