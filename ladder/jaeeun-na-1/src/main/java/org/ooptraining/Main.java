@@ -22,12 +22,19 @@ public class Main {
 
     public static void run() {
         final RenderPolicy policy = RandomRenderPolicy.of(new DefaultRandom());
-        run(policy);
+        run(policy, new StandardInputOutput());
+    }
+
+    public static void run(final IO io) {
+        final RenderPolicy policy = RandomRenderPolicy.of(new DefaultRandom());
+        run(policy, io);
     }
 
     public static void run(final RenderPolicy renderPolicy) {
-        final IO io = new StandardInputOutput();
+        run(renderPolicy, new StandardInputOutput());
+    }
 
+    public static void run(final RenderPolicy renderPolicy, final IO io) {
         final GameContextProcessor gameContextProcessor = GameContextProcessor.of(io);
         final GameContext gameContext = gameContextProcessor.run(Arrays.asList(
                 Setting.NAME,
@@ -41,6 +48,8 @@ public class Main {
 
         final QueryProcessor queryProcessor = QueryProcessor.of(io);
         queryProcessor.run(gameContext);
+
+        io.close();
     }
 
     private static void printFormattedRenderResult(final IO io, final String renderResult) {
