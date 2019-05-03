@@ -2,24 +2,25 @@ package util;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import util.io.StandardInputUtil;
 
 import java.lang.reflect.Method;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class InputUtilTest {
+class StandardInputUtilTest {
 
-    InputUtil inputUtil;
+    StandardInputUtil standardInputUtil;
 
     @BeforeAll
     void setUp() {
         System.out.println("INIT InputUtilTest");
-        inputUtil = new InputUtil();
+        standardInputUtil = new StandardInputUtil();
     }
 
     @Test
     void inputPeople() throws Exception {
-        Method method = InputUtil.class.getDeclaredMethod("inputPeople");
+        Method method = StandardInputUtil.class.getDeclaredMethod("inputPeople");
         method.setAccessible(true);
 
         // given
@@ -33,7 +34,7 @@ class InputUtilTest {
 
     @Test
     void inputResults() throws Exception {
-        Method method = InputUtil.class.getDeclaredMethod("inputResults");
+        Method method = StandardInputUtil.class.getDeclaredMethod("inputResults");
         method.setAccessible(true);
 
         // given
@@ -47,7 +48,7 @@ class InputUtilTest {
 
     @Test
     void inputHeight() throws Exception {
-        Method method = InputUtil.class.getDeclaredMethod("inputHeight");
+        Method method = StandardInputUtil.class.getDeclaredMethod("inputHeight");
         method.setAccessible(true);
 
         // given
@@ -61,7 +62,7 @@ class InputUtilTest {
 
     @Test
     void inputTarget() throws Exception {
-        Method method = InputUtil.class.getDeclaredMethod("inputTarget");
+        Method method = StandardInputUtil.class.getDeclaredMethod("inputTarget");
         method.setAccessible(true);
 
         // given
