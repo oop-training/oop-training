@@ -1,0 +1,7 @@
+pobi,honux,crong,jk
+X,5000,X,3000
+5
+pobi
+jk
+@all
+@bye
