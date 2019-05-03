@@ -1,6 +1,7 @@
 package org.ooptraining;
 
 import lombok.extern.java.Log;
+import org.ooptraining.io.ClosableIO;
 import org.ooptraining.io.IO;
 import org.ooptraining.io.StandardInputOutput;
 import org.ooptraining.query.QueryProcessor;
@@ -25,9 +26,10 @@ public class Main {
         run(policy, new StandardInputOutput());
     }
 
-    public static void run(final IO io) {
+    public static void run(final ClosableIO io) {
         final RenderPolicy policy = RandomRenderPolicy.of(new DefaultRandom());
         run(policy, io);
+        io.close();
     }
 
     public static void run(final RenderPolicy renderPolicy) {
@@ -48,8 +50,6 @@ public class Main {
 
         final QueryProcessor queryProcessor = QueryProcessor.of(io);
         queryProcessor.run(gameContext);
-
-        io.close();
     }
 
     private static void printFormattedRenderResult(final IO io, final String renderResult) {

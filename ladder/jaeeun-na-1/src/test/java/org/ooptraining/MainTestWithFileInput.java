@@ -1,9 +1,9 @@
 package org.ooptraining;
 
 import org.junit.jupiter.api.Test;
+import org.ooptraining.io.ClosableIO;
 import org.ooptraining.io.FileInput;
 import org.ooptraining.io.FileInputStandardOutput;
-import org.ooptraining.io.IO;
 import org.ooptraining.render.policy.OneLineRenderPolicy;
 
 import java.io.ByteArrayOutputStream;
@@ -20,7 +20,7 @@ public class MainTestWithFileInput {
         System.setOut(new PrintStream(out));
 
         final FileInput input = FileInput.of("src/test/resources/test.txt");
-        final IO io = new FileInputStandardOutput(input);
+        final ClosableIO io = new FileInputStandardOutput(input);
 
         //when
         Main.run(new OneLineRenderPolicy(), io);
