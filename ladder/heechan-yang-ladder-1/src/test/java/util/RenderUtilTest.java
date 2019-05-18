@@ -31,16 +31,16 @@ class RenderUtilTest {
         String[] rewards4 = new String[]{"333", "4444", "55555", "666666", "1010101010"};
 
         //when
-        int eachWidth1 = (int) getEachWidthMethod.invoke(renderUtil, people1, rewards1);
-        int eachWidth2 = (int) getEachWidthMethod.invoke(renderUtil, people2, rewards2);
-        int eachWidth3 = (int) getEachWidthMethod.invoke(renderUtil, people3, rewards3);
-        int eachWidth4 = (int) getEachWidthMethod.invoke(renderUtil, people4, rewards4);
+        int intervalWidth1 = (int) getEachWidthMethod.invoke(renderUtil, people1, rewards1);
+        int intervalWidth2 = (int) getEachWidthMethod.invoke(renderUtil, people2, rewards2);
+        int intervalWidth3 = (int) getEachWidthMethod.invoke(renderUtil, people3, rewards3);
+        int intervalWidth4 = (int) getEachWidthMethod.invoke(renderUtil, people4, rewards4);
 
         //then
-        assertThat(eachWidth1).isEqualTo(11);
-        assertThat(eachWidth2).isEqualTo(11);
-        assertThat(eachWidth3).isEqualTo(12);
-        assertThat(eachWidth4).isEqualTo(13);
+        assertThat(intervalWidth1).isEqualTo(11);
+        assertThat(intervalWidth2).isEqualTo(11);
+        assertThat(intervalWidth3).isEqualTo(12);
+        assertThat(intervalWidth4).isEqualTo(13);
     }
 
     @Test
@@ -51,18 +51,18 @@ class RenderUtilTest {
         getHorizontalPrintMethod.setAccessible(true);
 
         // given
-        int eachWidth1 = 4;
-        int eachWidth2 = 5;
-        int eachWidth3 = 6;
+        int intervalWidth1 = 4;
+        int intervalWidth2 = 5;
+        int intervalWidth3 = 6;
 
         char char1 = ' ';
         char char2 = '-';
         char char3 = '*';
 
         //when
-        String result1 = (String) getHorizontalPrintMethod.invoke(renderUtil, char1, eachWidth1);
-        String result2 = (String) getHorizontalPrintMethod.invoke(renderUtil, char2, eachWidth2);
-        String result3 = (String) getHorizontalPrintMethod.invoke(renderUtil, char3, eachWidth3);
+        String result1 = (String) getHorizontalPrintMethod.invoke(renderUtil, char1, intervalWidth1);
+        String result2 = (String) getHorizontalPrintMethod.invoke(renderUtil, char2, intervalWidth2);
+        String result3 = (String) getHorizontalPrintMethod.invoke(renderUtil, char3, intervalWidth3);
 
         //then
         assertThat(result1).isEqualTo("   ");

@@ -1,81 +1,81 @@
 package util;
 
+import lombok.Getter;
+import util.io.StandardInputUtil;
+import util.io.StandardOutputUtil;
+import vo.Person;
+import vo.Reward;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@Getter
 public class Ladder {
-    private InputUtil inputUtil;
-    private OutputUtil outputUtil;
-    private RenderUtil renderUtil;
+    private static final String ORDER_EXIT = "exit";
 
-    private String[] people;
-    private String[] rewards;
+    private StandardInputUtil standardInputUtil;
+    private StandardOutputUtil standardOutputUtil;
+
+    private List<Person> people;
+    private List<Reward> rewards;
+    private int intervalWidth;
     private int height;
     private boolean[][] isConnectedMatrix;
 
-    private Map<String, String> resultMap;
-
     public Ladder() {
-        this.inputUtil = new InputUtil();
-        this.outputUtil = new OutputUtil();
-        this.renderUtil = new RenderUtil();
+        this.standardInputUtil = new StandardInputUtil();
+        this.standardOutputUtil = new StandardOutputUtil();
     }
 
     public void play() {
-        inputsForGame();
+        inputsForStart();
 
-        renderUtil.drawGame(people, rewards, isConnectedMatrix);
+        draw();
 
         inputForResult();
     }
 
-    private void inputsForGame() {
-        this.people = inputUtil.inputPeople();
-        this.rewards = inputUtil.inputResults();
-        this.height = inputUtil.inputHeight();
+    // 추상화레벨을 맞춰야할 듯 싶어서 메서드를 생성했는데, 굳이 필요할까?
+    private void draw() {
+        RenderUtil.drawGame(this);
+    }
 
-        this.isConnectedMatrix = Random.getRandomLadder(people.length, this.height);
+    private void inputsForStart() {
+        this.people = standardInputUtil.inputPeople();
+        this.rewards = standardInputUtil.inputRewards();
+        this.height = standardInputUtil.inputHeight();
 
-        this.resultMap = getResultMap(people, rewards, isConnectedMatrix);
+        this.isConnectedMatrix = RandomLadderUtil.getRandomLadderHorizontalBar(people.size(), this.height);
+
+        setResults();
     }
 
     private void inputForResult() {
-        String target = inputUtil.inputTarget();
+        String target = standardInputUtil.inputTarget();
 
-        while (!target.equals(Constants.TEXT_EXIT)) {
-            outputUtil.printResult(people, resultMap, target);
+        while (!target.equals(ORDER_EXIT)) {
+            standardOutputUtil.printResult(people, target);
 
-            target = inputUtil.inputTarget();
+            target = standardInputUtil.inputTarget();
         }
     }
 
-    private Map<String, String> getResultMap(String[] people, String[] rewards, boolean[][] isConnectedMatrix) {
-        int[] results = new int[people.length];
-
-        for (int i = 0; i < people.length; i++) {
-            results[i] = i;
+    private void setResults() {
+        for (int i = 0; i < people.size(); i++) {
+            Person tempPerson = people.get(i);
+            Reward tempReward = rewards.get(i);
+            tempPerson.setReward(tempReward);
         }
 
         for (boolean[] isConnectedArray : isConnectedMatrix) {
             for (int j = 0; j < isConnectedArray.length; j++) {
+                Person person1 = people.get(j);
+                Person person2 = people.get(j + 1);
                 if (isConnectedArray[j]) {
-                    swap(results, j, j + 1);
+                    person1.swapWith(person2);
                 }
             }
         }
-
-        Map<String, String> resultMap = new HashMap<>();
-
-        for (int i = 0; i < people.length; i++) {
-            resultMap.put(people[results[i]], rewards[i]);
-        }
-
-        return resultMap;
-    }
-
-    private void swap(int[] results, int index1, int index2) {
-        int temp = results[index1];
-        results[index1] = results[index2];
-        results[index2] = temp;
     }
 }
